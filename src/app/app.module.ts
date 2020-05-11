@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {AppComponent} from './component/app/app.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -13,33 +13,43 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
-import {metaReducers, reducers} from './app.reducer';
+import {metaReducers} from './app.reducer';
+import {AuthModule} from "./module/auth/auth.module";
+import {httpInterceptorProviders} from "../shared/http-interceptor";
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
+import {NzButtonModule, NzResultModule} from "ng-zorro-antd";
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent,
+    UnauthorizedAccessComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([]),
-    StoreModule.forRoot(reducers, {
+    StoreModule.forRoot({}, {
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
       }
     }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    AuthModule,
+    AppRoutingModule,
+    NzResultModule,
+    NzButtonModule
   ],
-  providers: [{provide: NZ_I18N, useValue: en_US}],
+  providers: [{provide: NZ_I18N, useValue: en_US}, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
