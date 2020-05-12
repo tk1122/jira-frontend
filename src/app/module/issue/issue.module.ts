@@ -6,6 +6,7 @@ import {IssueComponent} from './component/issue/issue.component';
 import {NzButtonModule} from "ng-zorro-antd";
 import { StoreModule } from '@ngrx/store';
 import * as fromIssue from './issue.reducer';
+import {AppModule} from "../../app.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import * as fromIssue from './issue.reducer';
     CommonModule,
     IssueRoutingModule,
     NzButtonModule,
-    StoreModule.forFeature(fromIssue.issueFeatureKey, fromIssue.reducer)
+    StoreModule.forFeature(fromIssue.issueFeatureKey, fromIssue.reducer),
+    AppModule
   ]
 })
 export class IssueModule {

@@ -18,8 +18,9 @@ import {AuthModule} from "./module/auth/auth.module";
 import {httpInterceptorProviders} from "../shared/http-interceptor";
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
-import {NzButtonModule, NzResultModule} from "ng-zorro-antd";
+import {NzButtonModule, NzGridModule, NzResultModule} from "ng-zorro-antd";
 import { SignupComponent } from './module/auth/component/signup/signup.component';
+import { HeaderComponent } from './component/header/header.component';
 
 registerLocaleData(en);
 
@@ -27,7 +28,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    UnauthorizedAccessComponent
+    UnauthorizedAccessComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +50,13 @@ registerLocaleData(en);
     AuthModule,
     AppRoutingModule,
     NzResultModule,
-    NzButtonModule
+    NzButtonModule,
+    NzGridModule
   ],
   providers: [{provide: NZ_I18N, useValue: en_US}, httpInterceptorProviders],
+  exports: [
+    HeaderComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
