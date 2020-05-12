@@ -35,6 +35,28 @@ export class AuthEffects implements OnInitEffects {
     )
   }, {dispatch: false})
 
+  signup$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signup),
+      exhaustMap(action =>
+        this.authService.signup(action.username, action.password, action.passwordCheck).pipe(
+          map(() => AuthActions.signUpSuccess({message: {code:"200", message: "Signup success!"}})),
+          catchError(error => of(AuthActions.loginFailure({message: {code: "234", message: "334"}})))
+        )
+      )
+    )
+  });
+
+  signupSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signUpSuccess),
+      tap((action => {
+        console.log(action.message);
+        this.router.navigateByUrl('/login').then()
+      }))
+    )
+  }, {dispatch: false})
+
   logout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.logout),

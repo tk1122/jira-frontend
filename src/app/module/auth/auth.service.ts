@@ -12,6 +12,10 @@ export class AuthService {
     username: 'sinhngo', id: 1, role: UserRoles.Admin, status: UserStatus.Active, token: '123'
   }
 
+  private readonly mockSignUpSuccessResponse = {
+    username: 'sinhngo'
+  }
+
   constructor(private readonly httpClient: HttpClient) {
   }
 
@@ -21,5 +25,9 @@ export class AuthService {
     // }
     //
     // return of(this.mockLoginFailureResponse)
+  }
+
+  signup(username: string, password: string, passwordCheck: string) {
+    return of(this.mockSignUpSuccessResponse)
   }
 }

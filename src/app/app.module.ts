@@ -19,6 +19,7 @@ import {httpInterceptorProviders} from "../shared/http-interceptor";
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
 import {NzButtonModule, NzResultModule} from "ng-zorro-antd";
+import { SignupComponent } from './module/auth/component/signup/signup.component';
 
 registerLocaleData(en);
 
