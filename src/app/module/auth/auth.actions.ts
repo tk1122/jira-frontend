@@ -22,4 +22,6 @@ const logout = createAction(
   '[Header Component] Logout'
 );
 
-export const AuthActions = {login, loginSuccess, loginFailure, logout}
+const unauthorizedAccess = createAction('[Auth Gaurd] Unauthorized Access')
+
+export const AuthActions = {login, loginSuccess, loginFailure, logout, unauthorizedAccess}
