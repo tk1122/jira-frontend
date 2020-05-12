@@ -2,14 +2,14 @@ export interface Issue {
   id: number,
   name: string,
   desciption: string,
-  assignee_id: number,
-  reporter_id: number,
-  story_point: number,
+  assigneeId: number,
+  reporterId: number,
+  storyPoint: number,
   priority: IssuePriority,
-  sprint_id: number,
+  sprintId: number,
   type: IssueType,
   status: IssueStatus,
-  entity_type: ISSUE_ENTITY_TYPE
+  entityType: ISSUE_ENTITY_TYPE
 }
 
 const enum IssuePriority {

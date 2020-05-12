@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PageNotFoundComponent} from "./component/page-not-found/page-not-found.component";
-import {UnauthorizedAccessComponent} from "./component/unauthorized-access/unauthorized-access.component";
+import {PageNotFoundComponent} from "./module/shared-component/component/page-not-found/page-not-found.component";
+import {UnauthorizedAccessComponent} from "./module/shared-component/component/unauthorized-access/unauthorized-access.component";
 import {AuthGaurd} from "./module/auth/auth.gaurd";
 
 

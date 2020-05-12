@@ -16,18 +16,13 @@ import {EffectsModule} from '@ngrx/effects';
 import {metaReducers} from './app.reducer';
 import {AuthModule} from "./module/auth/auth.module";
 import {httpInterceptorProviders} from "../shared/http-interceptor";
-import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
-import { UnauthorizedAccessComponent } from './component/unauthorized-access/unauthorized-access.component';
-import {NzButtonModule, NzResultModule} from "ng-zorro-antd";
-import { SignupComponent } from './module/auth/component/signup/signup.component';
+import {SharedComponentModule} from './module/shared-component/shared-component.module';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    UnauthorizedAccessComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +42,7 @@ registerLocaleData(en);
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     AuthModule,
     AppRoutingModule,
-    NzResultModule,
-    NzButtonModule
+    SharedComponentModule
   ],
   providers: [{provide: NZ_I18N, useValue: en_US}, httpInterceptorProviders],
   bootstrap: [AppComponent]

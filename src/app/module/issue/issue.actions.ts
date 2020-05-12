@@ -1,15 +1,18 @@
-import { createAction, props } from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
+import {Issue} from "../../../shared/model/issue";
+import {ErrorMessage} from "../../../shared/model/error-message";
 
 export const loadIssues = createAction(
-  '[Issue] Load Issues'
+  '[Issue Page] Load Issues',
+  props<{ assineeId: number }>()
 );
 
 export const loadIssuesSuccess = createAction(
-  '[Issue] Load Issues Success',
-  props<{ data: any }>()
+  '[Issue API] Load Issues Success',
+  props<{ issues: Issue[] }>()
 );
 
 export const loadIssuesFailure = createAction(
-  '[Issue] Load Issues Failure',
-  props<{ error: any }>()
+  '[Issue API] Load Issues Failure',
+  props<{ error: ErrorMessage }>()
 );
