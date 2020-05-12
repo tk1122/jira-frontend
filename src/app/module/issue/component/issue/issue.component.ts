@@ -12,7 +12,23 @@ export class IssueComponent implements OnInit {
 
   constructor(private readonly store: Store) {
   }
-
+  listOfData = [
+    {
+      key: '1',
+      name: 'John Brown',
+      status: 'todo'
+    },
+    {
+      key: '2',
+      name: 'John Brown',
+      status: 'todo'
+    },
+    {
+      key: '3',
+      name: 'John Brown',
+      status: 'todo'
+    },
+  ];
   ngOnInit(): void {
   }
 
