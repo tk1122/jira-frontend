@@ -10,10 +10,11 @@ import {SharedComponentModule} from "../shared-component/shared-component.module
 import { EffectsModule } from '@ngrx/effects';
 import { IssueEffects } from './issue.effects';
 import { IssueListComponent } from './component/issue-list/issue-list.component';
+import { IssueStatusPipe } from "./pipe/issue-status.pipe";
 
 
 @NgModule({
-  declarations: [IssueComponent, IssueListComponent],
+  declarations: [IssueComponent, IssueListComponent, IssueStatusPipe],
   imports: [
     CommonModule,
     IssueRoutingModule,

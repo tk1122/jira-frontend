@@ -16,6 +16,13 @@ const selectAllFinishedIssues = createSelector(
   }
 )
 
+const selectAllTodoIssues = createSelector(
+  selectAllIssues,
+  issues => {
+    return issues.filter(i => i.status === IssueStatus.Todo)
+  }
+)
+
 const selectAllInProgressIssues = createSelector(
   selectAllIssues,
   issues => {
@@ -51,6 +58,7 @@ const selectIsAllIssuesLoaded = createSelector(
 
 export const IssueSelectors = {
   selectAllIssues,
+  selectAllTodoIssues,
   selectAllCheckingIssues,
   selectAllDoneIssues,
   selectAllFinishedIssues,

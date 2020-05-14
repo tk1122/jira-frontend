@@ -16,6 +16,7 @@ import {Issue} from "../../../../../shared/model/issue";
 })
 export class IssueComponent implements OnInit {
   allIssues$: Observable<Issue[]> = of([]);
+  todoIssues$: Observable<Issue[]> = of([]);
   inProgressIssues$: Observable<Issue[]> = of([]);
   finishedIssues$: Observable<Issue[]> = of([]);
   checkingIssues$: Observable<Issue[]> = of([]);
@@ -42,6 +43,10 @@ export class IssueComponent implements OnInit {
 
     this.inProgressIssues$ = this.store.pipe(
       select(IssueSelectors.selectAllInProgressIssues)
+    )
+
+    this.todoIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllTodoIssues)
     )
 
     this.finishedIssues$ = this.store.pipe(

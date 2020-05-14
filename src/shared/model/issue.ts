@@ -1,7 +1,7 @@
 export interface Issue {
   id: number,
   name: string,
-  desciption: string,
+  description: string,
   assigneeId: number,
   reporterId: number,
   storyPoint: number,

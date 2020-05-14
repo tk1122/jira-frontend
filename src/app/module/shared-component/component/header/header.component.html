@@ -8,19 +8,13 @@
   <div nz-col nzSpan="12">
     <ul nz-menu nzMode="horizontal" nzTheme="dark">
       <li nz-menu-item nzSelected>
-        <i nz-icon nzType="mail"></i>
-        Navigation One
+        Your work
       </li>
       <li nz-menu-item>
-        <i nz-icon nzType="mail"></i>
-        Navigation One
+        Project
       </li>
-      <li nz-submenu nzTitle="Navigation Three">
-        <ul>
-          <li nz-menu-item>Option 11</li>
-          <li nz-menu-item>Option 12</li>
-          <li nz-menu-item>Option 13</li>
-        </ul>
+      <li nz-menu-item>
+        People
       </li>
     </ul>
   </div>
@@ -32,10 +26,8 @@
     </a>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu>
-        <li nz-menu-item>1st menu item</li>
-        <li nz-menu-item>2nd menu item</li>
-        <li nz-menu-divider></li>
-        <li nz-menu-item nzDisabled>3rd menu item（disabled）</li>
+        <li nz-menu-item><i nz-icon nzType="eye" nzTheme="outline"></i> View Profile</li>
+        <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i>Sign Out</li>
       </ul>
     </nz-dropdown-menu>
   </div>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue} from "../../../../../shared/model/issue";
+import {Issue, IssueStatus} from "../../../../../shared/model/issue";
 
 @Component({
   selector: 'app-issue-list',
