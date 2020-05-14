@@ -6,8 +6,10 @@ import {ProjectComponent} from './component/project/project.component';
 import {ProjectListComponent} from './component/project-list/project-list.component';
 import {StoreModule} from '@ngrx/store';
 import * as fromProject from './project.reducer';
-import {EffectsModule} from '@ngrx/effects';
-import {ProjectEffects} from './project.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { ProjectEffects } from './project.effects';
+import {SharedComponentModule} from "../shared-component/shared-component.module";
+import {NzButtonModule, NzGridModule, NzIconModule, NzInputModule, NzTableModule, NzWaveModule} from "ng-zorro-antd";
 
 
 @NgModule({
@@ -17,7 +19,13 @@ import {ProjectEffects} from './project.effects';
     ProjectRoutingModule,
     StoreModule.forFeature(fromProject.projectFeatureKey, fromProject.reducer),
     EffectsModule.forFeature([ProjectEffects]),
+    SharedComponentModule,
+    NzGridModule,
+    NzTableModule,
+    NzInputModule,
+    NzIconModule,
+    NzWaveModule,
+    NzButtonModule
   ]
 })
-export class ProjectModule {
-}
+export class ProjectModule { }

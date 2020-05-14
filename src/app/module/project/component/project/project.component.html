@@ -1,1 +1,22 @@
-<p>project works!</p>
+<app-header></app-header>
+<div style="min-height: 100vh; padding: 10px 4em">
+  <div nz-row>
+    <h2>Project</h2>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="4">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" nz-input placeholder="" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div>
+    <div nz-col [nzSpan]="4" [nzOffset]="16">
+      <button nz-button nzType="primary">Create Project</button>
+    </div>
+  </div>
+  <div nz-row style="width: 100%; margin-top: 10px">
+    <app-project-list style="width: 100%"></app-project-list>
+  </div>
+</div>

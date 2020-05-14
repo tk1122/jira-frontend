@@ -21,6 +21,11 @@ export const reducer = createReducer(
   on(ProjectActions.loadProjectsSuccess, (state, {projects}) => projectEntityAdapter.setAll(projects, {
     ...state,
     isProjectsLoaded: true
-  }))
+  })),
+  on(ProjectActions.loadProjectFailure, state => state),
+  on(ProjectActions.createProject, (state, {project}) => projectEntityAdapter.addOne(project, state)),
+  on(ProjectActions.createProjectSuccess, state => state),
+  on(ProjectActions.updateProject, (state, {project}) => projectEntityAdapter.updateOne(project, state)),
+  on(ProjectActions.updateProjectSuccess, state => state)
 );
 

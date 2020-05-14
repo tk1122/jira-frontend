@@ -11,19 +11,21 @@ import {
   NzResultModule
 } from "ng-zorro-antd";
 import {HeaderComponent} from "./component/header/header.component";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
   declarations: [PageNotFoundComponent, UnauthorizedAccessComponent, HeaderComponent],
-  imports: [
-    CommonModule,
-    NzButtonModule,
-    NzResultModule,
-    NzGridModule,
-    NzMenuModule,
-    NzIconModule,
-    NzDropDownModule
-  ],
+    imports: [
+        CommonModule,
+        NzButtonModule,
+        NzResultModule,
+        NzGridModule,
+        NzMenuModule,
+        NzIconModule,
+        NzDropDownModule,
+        RouterModule
+    ],
   exports: [PageNotFoundComponent, UnauthorizedAccessComponent, HeaderComponent]
 })
 export class SharedComponentModule {

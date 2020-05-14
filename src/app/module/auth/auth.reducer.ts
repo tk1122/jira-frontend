@@ -20,5 +20,5 @@ export const reducer = createReducer(
   on(AuthActions.loginSuccess, (state, {user}) => ({isLoggedIn: true, user})),
   on(AuthActions.loginFailure, state => state),
   on(AuthActions.logout, state => ({isLoggedIn: false})),
+  on(AuthActions.signup, state => state)
 );
-

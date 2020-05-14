@@ -2,6 +2,7 @@ import {createAction, props} from '@ngrx/store';
 import {AuthInfo} from "../../../shared/model/auth-info";
 import {ErrorMessage} from "../../../shared/model/error-message";
 import {SuccessMessage} from "../../../shared/model/success-message";
+import {User} from "../../../shared/model/user";
 
 
 const login = createAction(
@@ -21,7 +22,7 @@ const loginFailure = createAction(
 
 const signup = createAction(
   '[SignUp Page] SignUp',
-  props<{ username: string, password: string, passwordCheck: string }>()
+  props<{ user: Partial<User> }>()
 );
 
 const signUpSuccess = createAction(
