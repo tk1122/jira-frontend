@@ -1,15 +1,19 @@
 <nz-table #basicTable [nzData]="[]">
   <thead>
-  <tr *ngIf=false>
+  <tr>
     <th>Name</th>
-    <th>Status</th>
+    <th>Description</th>
+    <th>Lead</th>
+    <th>PM</th>
+    <th>Edit</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
     <td class="issue-name">{{ data.name }}</td>
-    <td></td>
-
+    <td>{{ data.description }}</td>
+    <td>{{ data.leader }}</td>
+    <td>{{ data.pm }}</td>
   </tr>
   </tbody>
 </nz-table>

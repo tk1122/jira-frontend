@@ -4,8 +4,7 @@ import {select, Store} from "@ngrx/store";
 import {AuthActions} from "../../../auth/auth.actions";
 import {AuthSelectors} from "../../../auth/auth.selectors";
 import {filter, map} from "rxjs/operators";
-import {User} from "../../../../../shared/model/user";
-import {Router} from "@angular/router";
+import {AuthInfo} from "../../../../../shared/model/auth-info";
 
 @Component({
   selector: 'app-header',
@@ -14,16 +13,13 @@ import {Router} from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   username$: Observable<string> | undefined;
-  constructor(
-    private readonly store: Store,
-    private router: Router
-) { }
-  currentRouter: string = this.router.url;
+  constructor(private readonly store: Store) {
+  }
 
   ngOnInit(): void {
     this.username$ = this.store.pipe(
       select(AuthSelectors.selectUser),
-      filter((user): user is User => user !== undefined),
+      filter((user): user is AuthInfo => user !== undefined),
       map(user => user.username)
     )
   }

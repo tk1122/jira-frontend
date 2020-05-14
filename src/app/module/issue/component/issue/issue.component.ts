@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {AuthActions} from "../../../auth/auth.actions";
 import {IssueActions} from "../../issue.actions";
 import {AuthSelectors} from "../../../auth/auth.selectors";
 import {filter, tap, withLatestFrom} from "rxjs/operators";
