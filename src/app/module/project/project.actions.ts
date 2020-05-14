@@ -20,7 +20,7 @@ const loadProjectFailure = createAction(
 
 const createProject = createAction(
   '[Create Project Modal] Create project',
-  props<{ project: Update<Project> }>()
+  props<{ project: Project }>()
 )
 
 const createProjectSuccess = createAction(
