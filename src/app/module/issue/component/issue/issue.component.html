@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div style="min-height: 100vh; padding: 10px 4em">
+  <div nz-row>
+    <h2>Your work</h2>
+  </div>
+
+  <div nz-row>
+    <nz-tabset style="width: 100%">
+      <nz-tab nzTitle="Assigned to me">
+        <div nz-row style="width: 100%">
+          <app-issue-list style="width: 100%" [data]="allIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="To do">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="doneIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="In Progress">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="inProgressIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Finished">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="finishedIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Checking">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="checkingIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Reopened">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="reopenedIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Done">
+      <div nz-row>
+        <app-issue-list style="width: 100%" [data]="doneIssues$ | async"></app-issue-list>
+      </div>
+    </nz-tab>
+
+    </nz-tabset>
+  </div>
+</div>

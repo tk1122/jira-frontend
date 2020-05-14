@@ -133,6 +133,7 @@
   },
   "defaultProject": "jira-frontend",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "d4dced8e-1cc7-4d90-96e9-81fb756f7dc8"
   }
 }

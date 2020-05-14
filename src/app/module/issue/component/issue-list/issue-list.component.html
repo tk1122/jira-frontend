@@ -1,0 +1,15 @@
+<nz-table #basicTable [nzData]="issues" [nzShowPagination]="panigation">
+  <thead>
+  <tr *ngIf=false>
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td class="issue-name">{{ data.name }}</td>
+    <td>{{ data.status | issueStatus }}</td>
+
+  </tr>
+  </tbody>
+</nz-table>

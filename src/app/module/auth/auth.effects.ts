@@ -3,8 +3,7 @@ import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Store} from "@ngrx/store";
 import {AuthService} from "./auth.service";
 import {AuthActions} from "./auth.actions";
-import {catchError, exhaustMap, map, tap} from "rxjs/operators";
-import {of} from "rxjs";
+import {exhaustMap, map, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {User} from "../../../shared/model/user";
 
@@ -19,7 +18,6 @@ export class AuthEffects implements OnInitEffects {
       exhaustMap(action =>
         this.authService.login(action.username, action.password).pipe(
           map(user => AuthActions.loginSuccess({user})),
-          catchError(error => of(AuthActions.loginFailure({message: {code: "234", message: "334"}})))
         )
       )
     )
@@ -35,12 +33,42 @@ export class AuthEffects implements OnInitEffects {
     )
   }, {dispatch: false})
 
+  signup$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signup),
+      exhaustMap(action =>
+        this.authService.signup(action.username, action.password, action.passwordCheck).pipe(
+          map(() => AuthActions.signUpSuccess({message: {code: "200", message: "Signup success!"}})),
+        )
+      )
+    )
+  });
+
+  signupSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.signUpSuccess),
+      tap((action => {
+        console.log(action.message);
+        this.router.navigateByUrl('/login').then()
+      }))
+    )
+  }, {dispatch: false})
+
   logout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.logout),
       tap(() => {
         localStorage.removeItem('user');
         this.router.navigateByUrl('/login').then();
+      })
+    )
+  }, {dispatch: false})
+
+  unauthorizedAccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.unauthorizedAccess),
+      tap(() => {
+        this.router.navigateByUrl('/unauthorized-access').then();
       })
     )
   }, {dispatch: false})

@@ -1,6 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {User} from "../../../shared/model/user";
 import {ErrorMessage} from "../../../shared/model/error-message";
+import {SuccessMessage} from "../../../shared/model/success-message";
 
 
 const login = createAction(
@@ -18,8 +19,25 @@ const loginFailure = createAction(
   props<{ message: ErrorMessage }>()
 );
 
+const signup = createAction(
+  '[SignUp Page] SignUp',
+  props<{ username: string, password: string, passwordCheck: string }>()
+);
+
+const signUpSuccess = createAction(
+  '[Auth API] SignUp Success',
+  props<{ message: SuccessMessage }>()
+);
+
+const signUpFailure = createAction(
+  '[Auth API] SignUp Failure',
+  props<{ message: ErrorMessage }>()
+);
+
 const logout = createAction(
   '[Header Component] Logout'
 );
 
-export const AuthActions = {login, loginSuccess, loginFailure, logout}
+const unauthorizedAccess = createAction('[Auth Gaurd] Unauthorized Access')
+
+export const AuthActions = {login, loginSuccess, loginFailure, signup, signUpSuccess, signUpFailure, logout, unauthorizedAccess}

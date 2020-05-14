@@ -1,0 +1,34 @@
+<div nz-row class="header">
+  <div nz-col nzSpan="4">
+    <div>
+      <img class='icon-header' src="assets/images/icon-jira.svg" />
+      <span class="logo-name">Jira</span>
+    </div>
+  </div>
+  <div nz-col nzSpan="12">
+    <ul nz-menu nzMode="horizontal" nzTheme="dark">
+      <li nz-menu-item nzSelected>
+        Your work
+      </li>
+      <li nz-menu-item>
+        Project
+      </li>
+      <li nz-menu-item>
+        People
+      </li>
+    </ul>
+  </div>
+  <div nz-col nzSpan="4" nzOffset="4" class="username">
+    <i class="user-icon" nz-icon [nzType]="'user'"></i>
+    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+      <span class="name">{{username$ | async}}</span>
+      <i nz-icon nzType="down"></i>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item><i nz-icon nzType="eye" nzTheme="outline"></i> View Profile</li>
+        <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i>Sign Out</li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+</div>

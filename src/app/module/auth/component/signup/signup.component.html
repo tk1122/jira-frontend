@@ -1,6 +1,6 @@
 <div class="box">
   <nz-card style="width:300px;" class="login-form">
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="login()">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="signup()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
           <nz-input-group nzPrefixIcon="user">
@@ -15,13 +15,17 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password agai                                                          n!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="passwordCheck" placeholder="Password check!" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
       <div nz-row class="login-form-margin">
       </div>
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
-      Or <a routerLink="/signup"> register now! </a>
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Sign Up</button>
+      Or <a routerLink="/login"> Login now! </a>
     </form>
   </nz-card>
 </div>
-<button nz-button nzType="primary" (click)="login()">Login</button>
-<a routerLink="../issues">Issues</a>
-
