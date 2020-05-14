@@ -1,13 +1,13 @@
 export interface User {
   username: string,
   id: number,
-  role: UserRoles,
-  status: UserStatus,
   skill: string,
   level: string,
   email: string,
   age: number,
-  gender: UserGender
+  gender: UserGender,
+  role: UserRoles,
+  status: UserStatus,
 }
 
 export const enum UserGender {
