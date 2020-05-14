@@ -5,7 +5,7 @@ import {AuthService} from "./auth.service";
 import {AuthActions} from "./auth.actions";
 import {exhaustMap, map, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
-import {User} from "../../../shared/model/user";
+import {AuthInfo} from "../../../shared/model/auth-info";
 
 
 @Injectable()
@@ -86,7 +86,7 @@ export class AuthEffects implements OnInitEffects {
       return AuthActions.logout();
     }
 
-    const parsedUser = JSON.parse(user) as User;
+    const parsedUser = JSON.parse(user) as AuthInfo;
     return AuthActions.loginSuccess({user: parsedUser});
   }
 }

@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {of} from "rxjs";
-import {User, UserRoles, UserStatus} from "../../../shared/model/user";
+import {AuthInfo, UserRoles, UserStatus} from "../../../shared/model/auth-info";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly mockLoginSuccessResponse: User = {
+  private readonly mockLoginSuccessResponse: AuthInfo = {
     username: 'sinhngo', id: 1, role: UserRoles.Admin, status: UserStatus.Active, token: '123'
   }
 

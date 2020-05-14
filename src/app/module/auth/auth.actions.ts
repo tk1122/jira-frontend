@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {User} from "../../../shared/model/user";
+import {AuthInfo} from "../../../shared/model/auth-info";
 import {ErrorMessage} from "../../../shared/model/error-message";
 import {SuccessMessage} from "../../../shared/model/success-message";
 
@@ -11,7 +11,7 @@ const login = createAction(
 
 const loginSuccess = createAction(
   '[Auth API] Login Success',
-  props<{ user: User }>()
+  props<{ user: AuthInfo }>()
 );
 
 const loginFailure = createAction(
