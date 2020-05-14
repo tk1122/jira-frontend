@@ -7,6 +7,8 @@ import {NzButtonModule} from "ng-zorro-antd";
 import {StoreModule} from '@ngrx/store';
 import * as fromIssue from './issue.reducer';
 import {SharedComponentModule} from "../shared-component/shared-component.module";
+import { EffectsModule } from '@ngrx/effects';
+import { IssueEffects } from './issue.effects';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import {SharedComponentModule} from "../shared-component/shared-component.module
     IssueRoutingModule,
     NzButtonModule,
     StoreModule.forFeature(fromIssue.issueFeatureKey, fromIssue.reducer),
-    SharedComponentModule
+    SharedComponentModule,
+    EffectsModule.forFeature([IssueEffects])
   ]
 })
 export class IssueModule {

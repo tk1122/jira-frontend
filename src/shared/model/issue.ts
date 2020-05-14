@@ -12,19 +12,19 @@ export interface Issue {
   entityType: ISSUE_ENTITY_TYPE
 }
 
-const enum IssuePriority {
+export const enum IssuePriority {
   Low,
   Medium,
   High
 }
 
-const enum IssueType {
+export const enum IssueType {
   Story,
   Task,
   Bug
 }
 
-const enum IssueStatus {
+export const enum IssueStatus {
   Todo,
   InProgress,
   Done,
@@ -33,4 +33,4 @@ const enum IssueStatus {
   Reopened
 }
 
-type ISSUE_ENTITY_TYPE = 3;
+export type ISSUE_ENTITY_TYPE = 3;

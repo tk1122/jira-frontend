@@ -10,4 +10,8 @@ const selectUser = createSelector(selectAuthState, authState => authState.user);
 
 const selectUserToken = createSelector(selectUser, user => user?.token);
 
-export const AuthSelectors = {selectIsLoggedIn, selectUser, selectUserToken}
+const selectUserId = createSelector(selectUser, user => {
+  return user?.id
+})
+
+export const AuthSelectors = {selectIsLoggedIn, selectUser, selectUserToken, selectUserId}

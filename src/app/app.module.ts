@@ -40,9 +40,9 @@ registerLocaleData(en);
       }
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    SharedComponentModule,
     AuthModule,
     AppRoutingModule,
-    SharedComponentModule
   ],
   providers: [{provide: NZ_I18N, useValue: en_US}, httpInterceptorProviders],
   bootstrap: [AppComponent]
