@@ -7,6 +7,7 @@ import {AuthGaurd} from "./module/auth/auth.gaurd";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/issues'},
+  { path: 'projects', loadChildren: () => import('./module/project/project.module').then(m => m.ProjectModule) },
   {
     path: 'issues',
     loadChildren: () => import('./module/issue/issue.module').then(m => m.IssueModule),
