@@ -37,8 +37,8 @@ export class AuthEffects implements OnInitEffects {
     return this.actions$.pipe(
       ofType(AuthActions.signup),
       exhaustMap(action =>
-        this.authService.signup(action.username, action.password, action.passwordCheck).pipe(
-          map(() => AuthActions.signUpSuccess({message: {code: "200", message: "Signup success!"}})),
+        this.authService.signup(action.user).pipe(
+          map((user) => AuthActions.signUpSuccess({message: {code: "200", message: `Signup  ${user} success!`}})),
         )
       )
     )

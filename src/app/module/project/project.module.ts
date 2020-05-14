@@ -9,7 +9,7 @@ import * as fromProject from './project.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectEffects } from './project.effects';
 import {SharedComponentModule} from "../shared-component/shared-component.module";
-import {NzGridModule, NzTableModule} from "ng-zorro-antd";
+import {NzButtonModule, NzGridModule, NzIconModule, NzInputModule, NzTableModule, NzWaveModule} from "ng-zorro-antd";
 
 
 @NgModule({
@@ -21,7 +21,11 @@ import {NzGridModule, NzTableModule} from "ng-zorro-antd";
     EffectsModule.forFeature([ProjectEffects]),
     SharedComponentModule,
     NzGridModule,
-    NzTableModule
+    NzTableModule,
+    NzInputModule,
+    NzIconModule,
+    NzWaveModule,
+    NzButtonModule
   ]
 })
 export class ProjectModule { }
