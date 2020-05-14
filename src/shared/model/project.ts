@@ -2,9 +2,10 @@ export interface Project {
   name: string,
   description: string,
   status: ProjectStatus,
+  entityType: 0,
   pmId: number,
   leaderId: number,
-  entityType: 0
+  userIds: number[]
 }
 
 export const enum ProjectStatus {
