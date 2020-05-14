@@ -1,1 +1,15 @@
-<p>project-list works!</p>
+<nz-table #basicTable [nzData]="[]">
+  <thead>
+  <tr *ngIf=false>
+    <th>Name</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td class="issue-name">{{ data.name }}</td>
+    <td></td>
+
+  </tr>
+  </tbody>
+</nz-table>

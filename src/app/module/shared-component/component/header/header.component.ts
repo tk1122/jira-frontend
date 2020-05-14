@@ -5,6 +5,7 @@ import {AuthActions} from "../../../auth/auth.actions";
 import {AuthSelectors} from "../../../auth/auth.selectors";
 import {filter, map} from "rxjs/operators";
 import {User} from "../../../../../shared/model/user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -13,8 +14,11 @@ import {User} from "../../../../../shared/model/user";
 })
 export class HeaderComponent implements OnInit {
   username$: Observable<string> | undefined;
-  constructor(private readonly store: Store) {
-  }
+  constructor(
+    private readonly store: Store,
+    private router: Router
+) { }
+  currentRouter: string = this.router.url;
 
   ngOnInit(): void {
     this.username$ = this.store.pipe(
