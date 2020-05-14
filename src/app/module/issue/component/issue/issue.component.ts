@@ -15,26 +15,12 @@ import {Issue} from "../../../../../shared/model/issue";
   styleUrls: ['./issue.component.scss']
 })
 export class IssueComponent implements OnInit {
-
-  listOfData = [
-    {
-      key: '1',
-      name: 'John Brown',
-      status: 'todo'
-    },
-    {
-      key: '2',
-      name: 'John Brown',
-      status: 'todo'
-    },
-    {
-      key: '3',
-      name: 'John Brown',
-      status: 'todo'
-    },
-  ];
-
   allIssues$: Observable<Issue[]> = of([]);
+  inProgressIssues$: Observable<Issue[]> = of([]);
+  finishedIssues$: Observable<Issue[]> = of([]);
+  checkingIssues$: Observable<Issue[]> = of([]);
+  reopenedIssues$: Observable<Issue[]> = of([]);
+  doneIssues$: Observable<Issue[]> = of([]);
 
   constructor(private readonly store: Store) {
   }
@@ -43,19 +29,35 @@ export class IssueComponent implements OnInit {
     this.store.pipe(
       select(AuthSelectors.selectUserId),
       withLatestFrom(this.store.pipe(select(IssueSelectors.selectIsAllIssuesLoaded))),
-      filter(([userId, isIssuesLoaded])  => userId != undefined && !isIssuesLoaded),
+      filter(([userId, isIssuesLoaded]) => userId != undefined && !isIssuesLoaded),
       tap(([userId, _]) => {
         if (userId) {
           this.store.dispatch(IssueActions.loadIssues({assineeId: userId}))
         }
       })).subscribe()
 
-      this.allIssues$ = this.store.pipe(
-        select(IssueSelectors.selectAllIssues)
-      )
-  }
+    this.allIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllIssues)
+    )
 
-  logout() {
-    this.store.dispatch(AuthActions.logout());
+    this.inProgressIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllInProgressIssues)
+    )
+
+    this.finishedIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllFinishedIssues)
+    )
+
+    this.checkingIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllCheckingIssues)
+    )
+
+    this.reopenedIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllReopenedIssues)
+    )
+
+    this.doneIssues$ = this.store.pipe(
+      select(IssueSelectors.selectAllDoneIssues)
+    )
   }
 }
