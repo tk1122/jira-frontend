@@ -1,24 +1,57 @@
 <div class="box">
   <nz-card style="width:300px;" class="login-form">
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="signup()">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
-          <nz-input-group nzPrefixIcon="user">
+          <nz-input-group>
             <input type="text" nz-input formControlName="userName" placeholder="Username" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
+
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" />
+        <nz-form-control nzErrorTip="Please input your password!">
+          <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()" placeholder="Password"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="errorTpl">
+          <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Check password"/>
+          <ng-template #errorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              Please confirm your password!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('confirm')">
+              Two passwords that you enter is inconsistent!
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Email">
+          <nz-input-group>
+            <input type="text" nz-input formControlName="email" placeholder="Email!" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
+
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password agai                                                          n!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="passwordCheck" placeholder="Password check!" />
+        <nz-form-control nzErrorTip="Please input your Age!">
+          <nz-input-group>
+            <input type="text" nz-input formControlName="age" placeholder="Age!" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please choose your gender!">
+          <nz-input-group >
+            <nz-radio-group formControlName="gender">
+              <label nz-radio nzValue="Male">Male</label>
+              <label nz-radio nzValue="Female">Female</label>
+            </nz-radio-group>
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>

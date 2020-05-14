@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {of} from "rxjs";
-import {AuthInfo, UserRoles, UserStatus} from "../../../shared/model/auth-info";
+import {AuthInfo} from "../../../shared/model/auth-info";
+import {User, UserRoles, UserStatus} from "../../../shared/model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
     return of(this.mockLoginSuccessResponse)
   }
 
-  signup(username: string, password: string, passwordCheck: string) {
-    return of(this.mockSignUpSuccessResponse)
+  signup(user: Partial<User> ) {
+    return of(user)
   }
 }

@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {IssueRoutingModule} from './issue-routing.module';
 import {IssueComponent} from './component/issue/issue.component';
-import {NzButtonModule, NzGridModule, NzTableModule, NzTabsModule} from "ng-zorro-antd";
+import {NzButtonModule, NzGridModule, NzIconModule, NzTableModule, NzTabsModule} from "ng-zorro-antd";
 import {StoreModule} from '@ngrx/store';
 import * as fromIssue from './issue.reducer';
 import {SharedComponentModule} from "../shared-component/shared-component.module";
@@ -15,17 +15,18 @@ import { IssueStatusPipe } from "./pipe/issue-status.pipe";
 
 @NgModule({
   declarations: [IssueComponent, IssueListComponent, IssueStatusPipe],
-  imports: [
-    CommonModule,
-    IssueRoutingModule,
-    NzButtonModule,
-    StoreModule.forFeature(fromIssue.issueFeatureKey, fromIssue.reducer),
-    SharedComponentModule,
-    EffectsModule.forFeature([IssueEffects]),
-    NzGridModule,
-    NzTabsModule,
-    NzTableModule
-  ]
+    imports: [
+        CommonModule,
+        IssueRoutingModule,
+        NzButtonModule,
+        StoreModule.forFeature(fromIssue.issueFeatureKey, fromIssue.reducer),
+        SharedComponentModule,
+        EffectsModule.forFeature([IssueEffects]),
+        NzGridModule,
+        NzTabsModule,
+        NzTableModule,
+        NzIconModule
+    ]
 })
 export class IssueModule {
 }
