@@ -1,13 +1,13 @@
 import {createReducer, on} from '@ngrx/store';
 import {AuthActions} from "./auth.actions";
-import {User} from "../../../shared/model/user";
+import {AuthInfo} from "../../../shared/model/auth-info";
 
 
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
   isLoggedIn: boolean,
-  user?: User
+  user?: AuthInfo
 }
 
 export const initialAuthState: AuthState = {
