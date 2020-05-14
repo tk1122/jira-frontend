@@ -17,7 +17,7 @@ export const initialIssueState: IssueState = issueEntityAdapter.getInitialState(
 export const reducer = createReducer(
   initialIssueState,
   on(IssueActions.loadIssues, state => state),
-  on(IssueActions.loadIssuesSuccess, (state, {issues}) => issueEntityAdapter.setAll(issues, {...state, allIssuesLoaded: true})),
+  on(IssueActions.loadIssuesSuccess, (state, {issues}) => issueEntityAdapter.setAll(issues, {...state, isAllIssuesLoaded: true})),
   on(IssueActions.loadIssuesFailure, state => state)
 );
 

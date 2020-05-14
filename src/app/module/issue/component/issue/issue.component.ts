@@ -5,6 +5,8 @@ import {IssueActions} from "../../issue.actions";
 import {AuthSelectors} from "../../../auth/auth.selectors";
 import {filter, tap, withLatestFrom} from "rxjs/operators";
 import {IssueSelectors} from "../../issue.selectors";
+import {Observable, of} from "rxjs";
+import {Issue} from "../../../../../shared/model/issue";
 
 
 @Component({
@@ -14,6 +16,26 @@ import {IssueSelectors} from "../../issue.selectors";
 })
 export class IssueComponent implements OnInit {
 
+  listOfData = [
+    {
+      key: '1',
+      name: 'John Brown',
+      status: 'todo'
+    },
+    {
+      key: '2',
+      name: 'John Brown',
+      status: 'todo'
+    },
+    {
+      key: '3',
+      name: 'John Brown',
+      status: 'todo'
+    },
+  ];
+
+  allIssues$: Observable<Issue[]> = of([]);
+
   constructor(private readonly store: Store) {
   }
 
@@ -21,16 +43,16 @@ export class IssueComponent implements OnInit {
     this.store.pipe(
       select(AuthSelectors.selectUserId),
       withLatestFrom(this.store.pipe(select(IssueSelectors.selectIsAllIssuesLoaded))),
-      tap(() => console.log('Issue component init')),
-
       filter(([userId, isIssuesLoaded])  => userId != undefined && !isIssuesLoaded),
       tap(([userId, _]) => {
-        console.log('Issue component init')
-
         if (userId) {
           this.store.dispatch(IssueActions.loadIssues({assineeId: userId}))
         }
-      }))
+      })).subscribe()
+
+      this.allIssues$ = this.store.pipe(
+        select(IssueSelectors.selectAllIssues)
+      )
   }
 
   logout() {
