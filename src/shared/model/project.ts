@@ -1,10 +1,11 @@
 export interface Project {
+  id: number,
   name: string,
   description: string,
   status: ProjectStatus,
-  entityType: 0,
   pmId: number,
   leaderId: number,
+  entityType: 0,
   userIds: number[]
 }
 
