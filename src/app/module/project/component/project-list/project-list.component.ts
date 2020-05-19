@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Project} from "../../../../../shared/model/project";
 import {select, Store} from "@ngrx/store";
-import {ProjectActions} from "../../project.actions";
-import {AuthSelectors} from "../../../auth/auth.selectors";
-import {ProjectSelectors} from "../../project.selectors";
+import {loadProjects} from "../../project.actions";
+import {userId} from "../../../auth/auth.selectors";
+import {projects} from "../../project.selectors";
 
 @Component({
   selector: 'app-project-list',
@@ -13,17 +13,20 @@ import {ProjectSelectors} from "../../project.selectors";
 })
 export class ProjectListComponent implements OnInit {
 
+  projects$: Observable<Project[]> = of([])
+
   constructor(
     private readonly store: Store
-  ) { }
-  projects$: Observable<Project[]> = of([])
+  ) {
+  }
+
   ngOnInit(): void {
-    this.store.pipe(select(AuthSelectors.selectUserId)).subscribe(userId => {
+    this.store.pipe(select(userId)).subscribe(userId => {
       if (userId) {
-        this.store.dispatch(ProjectActions.loadProjects({userId}))
+        this.store.dispatch(loadProjects({userId}))
       }
     })
 
-    this.projects$ = this.store.pipe(select(ProjectSelectors.selectProjects))
+    this.projects$ = this.store.pipe(select(projects))
   }
 }

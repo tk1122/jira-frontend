@@ -2,67 +2,56 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {issueEntityAdapter, issueFeatureKey, IssueState} from "./issue.reducer";
 import {IssueStatus} from "../../../shared/model/issue";
 
-const selectIssueState = createFeatureSelector<IssueState>(issueFeatureKey);
+export const issueState = createFeatureSelector<IssueState>(issueFeatureKey);
 
-const selectAllIssues = createSelector(
-  selectIssueState,
+export const issues = createSelector(
+  issueState,
   issueEntityAdapter.getSelectors().selectAll
 )
 
-const selectAllFinishedIssues = createSelector(
-  selectAllIssues,
+export const finishedIssues = createSelector(
+  issues,
   issues => {
     return issues.filter(i => i.status === IssueStatus.Finished)
   }
 )
 
-const selectAllTodoIssues = createSelector(
-  selectAllIssues,
+export const todoIssues = createSelector(
+  issues,
   issues => {
     return issues.filter(i => i.status === IssueStatus.Todo)
   }
 )
 
-const selectAllInProgressIssues = createSelector(
-  selectAllIssues,
+export const inProgressIssues = createSelector(
+  issues,
   issues => {
     return issues.filter(i => i.status === IssueStatus.InProgress)
   }
 )
 
-const selectAllCheckingIssues = createSelector(
-  selectAllIssues,
+export const checkingIssues = createSelector(
+  issues,
   issues => {
     return issues.filter(i => i.status === IssueStatus.Checking)
   }
 )
 
-const selectAllReopenedIssues = createSelector(
-  selectAllIssues,
+export const reopenedIssues = createSelector(
+  issues,
   issues => {
     return issues.filter(i => i.status === IssueStatus.Reopened)
   }
 )
 
- const selectAllDoneIssues = createSelector(
-  selectAllIssues,
+export const doneIssues = createSelector(
+  issues,
   issues => {
     return issues.filter(i => i.status === IssueStatus.Done)
   }
 )
 
-const selectIsAllIssuesLoaded = createSelector(
-  selectIssueState,
+export const isIssuesLoaded = createSelector(
+  issueState,
   issueState => issueState.isAllIssuesLoaded
 )
-
-export const IssueSelectors = {
-  selectAllIssues,
-  selectAllTodoIssues,
-  selectAllCheckingIssues,
-  selectAllDoneIssues,
-  selectAllFinishedIssues,
-  selectAllReopenedIssues,
-  selectAllInProgressIssues,
-  selectIsAllIssuesLoaded
-}

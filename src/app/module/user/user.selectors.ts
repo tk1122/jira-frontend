@@ -3,5 +3,5 @@ import {userEntityAdapter, userFeatureKey, UserState} from "./user.reducer";
 
 const selectUserState = createFeatureSelector<UserState>(userFeatureKey)
 
-const selectAllUsers = createSelector(selectUserState, userEntityAdapter.getSelectors().selectAll)
+export const users = createSelector(selectUserState, userEntityAdapter.getSelectors().selectAll)
 

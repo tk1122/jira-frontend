@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {Store} from "@ngrx/store";
 import {AuthService} from "./auth.service";
-import {AuthActions} from "./auth.actions";
+import {login, loginSuccess, logout, signup, signUpSuccess, unauthorizedAccess} from "./auth.actions";
 import {exhaustMap, map, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {AuthInfo} from "../../../shared/model/auth-info";
@@ -14,10 +14,10 @@ export class AuthEffects implements OnInitEffects {
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.login),
+      ofType(login),
       exhaustMap(action =>
         this.authService.login(action.username, action.password).pipe(
-          map(user => AuthActions.loginSuccess({user})),
+          map(user => loginSuccess({user})),
         )
       )
     )
@@ -25,7 +25,7 @@ export class AuthEffects implements OnInitEffects {
 
   loginSuccess$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.loginSuccess),
+      ofType(loginSuccess),
       tap((action => {
         localStorage.setItem('user', JSON.stringify(action.user));
         this.router.navigateByUrl('/issues').then()
@@ -35,10 +35,10 @@ export class AuthEffects implements OnInitEffects {
 
   signup$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.signup),
+      ofType(signup),
       exhaustMap(action =>
         this.authService.signup(action.user).pipe(
-          map((user) => AuthActions.signUpSuccess({message: {code: "200", message: `Signup  ${user} success!`}})),
+          map((user) => signUpSuccess({message: {code: "200", message: `Signup  ${user} success!`}})),
         )
       )
     )
@@ -46,7 +46,7 @@ export class AuthEffects implements OnInitEffects {
 
   signupSuccess$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.signUpSuccess),
+      ofType(signUpSuccess),
       tap((action => {
         console.log(action.message);
         this.router.navigateByUrl('/login').then()
@@ -56,7 +56,7 @@ export class AuthEffects implements OnInitEffects {
 
   logout$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.logout),
+      ofType(logout),
       tap(() => {
         localStorage.removeItem('user');
         this.router.navigateByUrl('/login').then();
@@ -66,7 +66,7 @@ export class AuthEffects implements OnInitEffects {
 
   unauthorizedAccess$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AuthActions.unauthorizedAccess),
+      ofType(unauthorizedAccess),
       tap(() => {
         this.router.navigateByUrl('/unauthorized-access').then();
       })
@@ -83,10 +83,10 @@ export class AuthEffects implements OnInitEffects {
   ngrxOnInitEffects() {
     const user = localStorage.getItem('user');
     if (!user) {
-      return AuthActions.logout();
+      return logout();
     }
 
     const parsedUser = JSON.parse(user) as AuthInfo;
-    return AuthActions.loginSuccess({user: parsedUser});
+    return loginSuccess({user: parsedUser});
   }
 }
