@@ -3,59 +3,47 @@ import {Project} from "../../../shared/model/project";
 import {ErrorMessage} from "../../../shared/model/error-message";
 import {Update} from "@ngrx/entity";
 
-const loadProjects = createAction(
+export const loadProjects = createAction(
   '[Project Page] Load projects',
   props<{ userId: number }>()
 )
 
-const loadProjectsSuccess = createAction(
+export const loadProjectsSuccess = createAction(
   '[Project API] Load projects success',
   props<{ projects: Project[] }>()
 )
 
-const loadProjectFailure = createAction(
+export const loadProjectFailure = createAction(
   '[Project API] Load projects failure',
   props<{ message: ErrorMessage }>()
 )
 
-const createProject = createAction(
+export const createProject = createAction(
   '[Create Project Modal] Create project',
   props<{ project: Project }>()
 )
 
-const createProjectSuccess = createAction(
+export const createProjectSuccess = createAction(
   '[Project API] Create project success',
   props<{ message: ErrorMessage }>()
 )
 
-const createProjectFailure = createAction(
+export const createProjectFailure = createAction(
   '[Project API] Create project failure',
   props<{ message: ErrorMessage }>()
 )
 
-const updateProject = createAction(
+export const updateProject = createAction(
   '[Update Project Modal] Update project',
   props<{ project: Update<Project> }>()
 )
 
-const updateProjectSuccess = createAction(
+export const updateProjectSuccess = createAction(
   '[Project API] Update project success',
   props<{ message: ErrorMessage }>()
 )
 
-const updateProjectFailure = createAction(
+export const updateProjectFailure = createAction(
   '[Project API] Update project failure',
   props<{ message: ErrorMessage }>()
 )
-
-export const ProjectActions = {
-  createProject,
-  createProjectFailure,
-  createProjectSuccess,
-  loadProjectFailure,
-  loadProjects,
-  loadProjectsSuccess,
-  updateProject,
-  updateProjectFailure,
-  updateProjectSuccess
-}

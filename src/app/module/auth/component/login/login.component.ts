@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Store} from "@ngrx/store";
-import {AuthActions} from "../../auth.actions";
+import {login} from "../../auth.actions";
 
 @Component({
   selector: 'app-login',
@@ -18,8 +18,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
+      userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
+      remember: [true]
     });
   }
 
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
       console.log(this.validateForm.value);
-      this.store.dispatch(AuthActions.login(this.validateForm.value))
+      this.store.dispatch(login(this.validateForm.value))
     }
   }
 }
