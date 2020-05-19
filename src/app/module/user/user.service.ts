@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {User} from "../../../shared/model/user";
+import {User, UserStatus} from "../../../shared/model/user";
 import {Role} from "../../../shared/model/role";
 
 @Injectable({
@@ -25,7 +25,17 @@ export class UserService {
     return this.httpClient.get<User[]>(`${environment}/users`, {params})
   }
 
-  // getUsersByProjectId(projectId: number) {
-  //   return of(this.mockUsers)
-  // }
+  updateUser(userId: number | string, status?: UserStatus, skill?: string, level?: string) {
+    return this.httpClient.put<User>(`${environment.url}/users/${userId}`, {
+      skill,
+      status,
+      level
+    })
+  }
+
+  updateUserRoles(userId: number, roleIds: number[]) {
+    return this.httpClient.put<User>(`${environment.url}/users/${userId}/roles`, {
+      roleIds
+    })
+  }
 }

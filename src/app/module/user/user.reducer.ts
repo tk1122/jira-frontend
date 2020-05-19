@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {User} from "../../../shared/model/user";
-import {loadRolesSuccess, loadUsersSuccess} from "./user.actions";
+import {loadRolesSuccess, loadUsersSuccess, updateUser} from "./user.actions";
 import {Role} from "../../../shared/model/role";
 
 
@@ -30,6 +30,7 @@ export const userReducer = createReducer(
     ...state,
     isUsersLoaded: true
   })),
+  on(updateUser, (state, {user}) => userEntityAdapter.updateOne(user, state))
 );
 
 export const roleReducer = createReducer(

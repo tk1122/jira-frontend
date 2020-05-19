@@ -6,7 +6,10 @@ import {
   loadRolesSuccess,
   loadUserFailure,
   loadUsers,
-  loadUsersSuccess
+  loadUsersSuccess,
+  updateUser,
+  updateUserFailure,
+  updateUserSuccess
 } from "./user.actions";
 import {catchError, filter, map, switchMap, withLatestFrom} from "rxjs/operators";
 import {UserService} from "./user.service";
@@ -29,9 +32,23 @@ export class UserEffects {
       ))
     )
   )
+
   loadUsersFailure$ = createEffect(() => this.actions$.pipe(
     ofType(loadUserFailure),
   ), {dispatch: false})
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUser),
+      switchMap(({user: {id, changes: {status, skill, level}}}) =>
+        this.userService.updateUser(id, status, skill, level).pipe(
+          map(user => updateUserSuccess({}),
+            catchError((err: ErrorMessage) => of(updateUserFailure({error: err})))
+          )
+        )
+      )
+    )
+  )
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
   }

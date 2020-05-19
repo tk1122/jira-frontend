@@ -1,9 +1,9 @@
-import {UserRoles, UserStatus} from "./user";
+import {UserStatus} from "./user";
 
 export interface AuthInfo {
   username: string,
   userId: number,
-  role: UserRoles[],
+  role: number[],
   accessToken: string,
   status: UserStatus,
   isAdmin: boolean
