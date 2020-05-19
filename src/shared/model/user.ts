@@ -1,28 +1,27 @@
+import {Role} from "./role";
+
 export interface User {
   username: string,
   id: number,
+  fullname: string,
+  status: UserStatus,
   skill: string,
   level: string,
   email: string,
   age: number,
   gender: UserGender,
-  role: UserRoles,
-  status: UserStatus,
+  roles: Role[],
 }
+
 
 export const enum UserGender {
   Male,
-  Female
-}
-
-export const enum UserRoles {
-  Admin,
-  PM,
-  Leader,
-  Dev
+  Female,
+  Others
 }
 
 export const enum UserStatus {
-  Active,
-  Blocked
+  Unactivated,
+  Activated,
+  Blocked,
 }

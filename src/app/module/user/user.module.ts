@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { UserRoutingModule } from './user-routing.module';
-import { UserComponent } from './component/user/user.component';
-import { StoreModule } from '@ngrx/store';
+import {UserRoutingModule} from './user-routing.module';
+import {UserComponent} from './component/user/user.component';
+import {StoreModule} from '@ngrx/store';
 import * as fromUser from './user.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from './user.effects';
+import {EffectsModule} from '@ngrx/effects';
+import {RoleEffects, UserEffects} from './user.effects';
 
 
 @NgModule({
@@ -14,8 +14,10 @@ import { UserEffects } from './user.effects';
   imports: [
     CommonModule,
     UserRoutingModule,
-    StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
-    EffectsModule.forFeature([UserEffects]),
+    StoreModule.forFeature(fromUser.userFeatureKey, fromUser.userReducer),
+    StoreModule.forFeature(fromUser.roleFeatureKey, fromUser.roleReducer),
+    EffectsModule.forFeature([UserEffects, RoleEffects]),
   ]
 })
-export class UserModule { }
+export class UserModule {
+}
