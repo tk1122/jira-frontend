@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {of} from "rxjs";
 import {AuthInfo} from "../../../shared/model/auth-info";
-import {User, UserRoles, UserStatus} from "../../../shared/model/user";
+import {User, UserStatus} from "../../../shared/model/user";
 import {environment} from '../../../environments/environment';
 
 @Injectable({
