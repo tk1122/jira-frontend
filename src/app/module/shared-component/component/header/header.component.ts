@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {select, Store} from "@ngrx/store";
-import {user} from "../../../auth/auth.selectors";
+import {user, isAdmin } from "../../../auth/auth.selectors";
 import {filter, map} from "rxjs/operators";
 import {AuthInfo} from "../../../../../shared/model/auth-info";
 import {logout} from "../../../auth/auth.actions";
@@ -13,7 +13,7 @@ import {logout} from "../../../auth/auth.actions";
 })
 export class HeaderComponent implements OnInit {
   username$: Observable<string> | undefined;
-
+  isAdmin$: Observable<boolean> | undefined;
   constructor(private readonly store: Store) {
   }
 
@@ -22,6 +22,11 @@ export class HeaderComponent implements OnInit {
       select(user),
       filter((user): user is AuthInfo => user !== undefined),
       map(user => user.username)
+    )
+    this.isAdmin$ = this.store.pipe(
+      select(user),
+      filter((user): user is AuthInfo => user !== undefined),
+      map(user => user.isAdmin)
     )
   }
 
