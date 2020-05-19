@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Store} from "@ngrx/store";
-import {AuthActions} from "../../auth.actions";
+import {login} from "../../auth.actions";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -25,6 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.store.dispatch(AuthActions.login({username: '', password: ''}))
+    this.store.dispatch(login({username: '', password: ''}))
   }
 }

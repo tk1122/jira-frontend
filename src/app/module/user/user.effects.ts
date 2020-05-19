@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {UserActions} from "./user.actions";
+import {loadUsers, loadUsersSuccess} from "./user.actions";
 import {map, switchMap} from "rxjs/operators";
 import {UserService} from "./user.service";
 
@@ -9,9 +9,9 @@ import {UserService} from "./user.service";
 export class UserEffects {
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActions.loadUsers),
+      ofType(loadUsers),
       switchMap(action => this.userService.loadUsers().pipe(
-        map(users => UserActions.loadUsersSuccess({users}))
+        map(users => loadUsersSuccess({users}))
       ))
     )
   )

@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
-import {AuthActions} from "./auth.actions";
 import {AuthInfo} from "../../../shared/model/auth-info";
+import {loginSuccess, logout} from "./auth.actions";
 
 
 export const authFeatureKey = 'auth';
@@ -16,9 +16,6 @@ export const initialAuthState: AuthState = {
 
 export const reducer = createReducer(
   initialAuthState,
-  on(AuthActions.login, state => state),
-  on(AuthActions.loginSuccess, (state, {user}) => ({isLoggedIn: true, user})),
-  on(AuthActions.loginFailure, state => state),
-  on(AuthActions.logout, state => ({isLoggedIn: false})),
-  on(AuthActions.signup, state => state)
+  on(loginSuccess, (state, {user}) => ({isLoggedIn: true, user})),
+  on(logout, _ => ({isLoggedIn: false})),
 );

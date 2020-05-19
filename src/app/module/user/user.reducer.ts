@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {User} from "../../../shared/model/user";
-import {UserActions} from "./user.actions";
+import {loadUsersSuccess} from "./user.actions";
 
 
 export const userFeatureKey = 'user';
@@ -17,11 +17,9 @@ export const initialState: UserState = userEntityAdapter.getInitialState({isUser
 
 export const reducer = createReducer(
   initialState,
-  on(UserActions.loadUsers, state => state),
-  on(UserActions.loadUsersSuccess, (state, {users}) => userEntityAdapter.setAll(users, {
+  on(loadUsersSuccess, (state, {users}) => userEntityAdapter.setAll(users, {
     ...state,
     isUsersLoaded: true
   })),
-  on(UserActions.loadUserFailure, state => state)
 );
 

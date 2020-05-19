@@ -1,9 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {IssueActions} from "../../issue.actions";
-import {AuthSelectors} from "../../../auth/auth.selectors";
-import {filter, tap, withLatestFrom} from "rxjs/operators";
-import {IssueSelectors} from "../../issue.selectors";
+import {loadIssues} from "../../issue.actions";
+import {userId} from "../../../auth/auth.selectors";
+import {tap} from "rxjs/operators";
+import {
+  checkingIssues,
+  doneIssues,
+  finishedIssues,
+  inProgressIssues,
+  issues,
+  reopenedIssues,
+  todoIssues
+} from "../../issue.selectors";
 import {Observable, of} from "rxjs";
 import {Issue} from "../../../../../shared/model/issue";
 
@@ -27,41 +35,39 @@ export class IssueComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.pipe(
-      select(AuthSelectors.selectUserId),
-      withLatestFrom(this.store.pipe(select(IssueSelectors.selectIsAllIssuesLoaded))),
-      filter(([userId, isIssuesLoaded]) => userId != undefined && !isIssuesLoaded),
-      tap(([userId, _]) => {
+      select(userId),
+      tap((userId) => {
         if (userId) {
-          this.store.dispatch(IssueActions.loadIssues({assineeId: userId}))
+          this.store.dispatch(loadIssues({assineeId: userId}))
         }
       })).subscribe()
 
     this.allIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllIssues)
+      select(issues)
     )
 
     this.inProgressIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllInProgressIssues)
+      select(inProgressIssues)
     )
 
     this.todoIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllTodoIssues)
+      select(todoIssues)
     )
 
     this.finishedIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllFinishedIssues)
+      select(finishedIssues)
     )
 
     this.checkingIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllCheckingIssues)
+      select(checkingIssues)
     )
 
     this.reopenedIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllReopenedIssues)
+      select(reopenedIssues)
     )
 
     this.doneIssues$ = this.store.pipe(
-      select(IssueSelectors.selectAllDoneIssues)
+      select(doneIssues)
     )
   }
 }

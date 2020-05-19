@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {AuthActions} from "../../auth.actions";
+import {signup} from "../../auth.actions";
 
 @Component({
   selector: 'app-signup',
@@ -36,9 +36,9 @@ export class SignupComponent implements OnInit {
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
-      return { required: true };
+      return {required: true};
     } else if (control.value !== this.validateForm.controls.password.value) {
-      return { confirm: true, error: true };
+      return {confirm: true, error: true};
     }
     return {};
   };
@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
       console.log(this.validateForm.value)
-      this.store.dispatch(AuthActions.signup(this.validateForm.value))
+      this.store.dispatch(signup(this.validateForm.value))
     }
   }
 

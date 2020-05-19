@@ -3,6 +3,7 @@ import {projectEntityAdapter, projectFeatureKey, ProjectState} from "./project.r
 
 const selectProjectState = createFeatureSelector<ProjectState>(projectFeatureKey);
 
-const selectProjects = createSelector(selectProjectState, projectEntityAdapter.getSelectors().selectAll)
+export const projects = createSelector(selectProjectState, projectEntityAdapter.getSelectors().selectAll)
 
-export const ProjectSelectors = {selectProjects}
+export const isProjectsLoaded = createSelector(selectProjectState, projectState => projectState.isProjectsLoaded)
+
