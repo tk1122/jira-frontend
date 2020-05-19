@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
 import {Store} from "@ngrx/store";
 import {AuthService} from "./auth.service";
-import {login, loginSuccess, logout, signup, signUpSuccess, unauthorizedAccess} from "./auth.actions";
-import {exhaustMap, map, tap} from "rxjs/operators";
+import {login, loginFailure, loginSuccess, logout, signup, signUpSuccess, unauthorizedAccess} from "./auth.actions";
+import {catchError, exhaustMap, map, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {AuthInfo} from "../../../shared/model/auth-info";
+import {ErrorMessage} from "../../../shared/model/error-message";
+import {of} from "rxjs";
 
 
 @Injectable()
@@ -19,20 +21,25 @@ export class AuthEffects implements OnInitEffects {
       exhaustMap(action =>
         this.authService.login(action.username, action.password).pipe(
           map(user => loginSuccess({user})),
+          catchError((err: ErrorMessage) => {
+            return of(loginFailure({message: err}))
+          })
         )
       )
     )
   });
 
+  loginFailure$ = createEffect(() => this.actions$.pipe(
+    ofType(loginFailure),
+    tap((action) => {
+      this.notification.error(action.message.message, '')
+    })
+  ), {dispatch: false})
+
   loginSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loginSuccess),
       tap((action => {
-        this.notification.create(
-          'success',
-          'Đăng nhập thành công',
-          ''
-        );
         localStorage.setItem('user', JSON.stringify(action.user));
         localStorage.setItem('accessToken', JSON.stringify(action.user.accessToken));
         this.router.navigateByUrl('/issues').then()

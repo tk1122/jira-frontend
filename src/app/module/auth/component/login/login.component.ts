@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
-      console.log(this.validateForm.value);
       this.store.dispatch(login(this.validateForm.value))
     }
   }
