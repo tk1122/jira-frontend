@@ -17,6 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
     this.store.pipe(select(userToken), filter((token): token is string => token !== undefined))
       .subscribe(token => this.authToken = token);
 
-    return next.handle(req.clone({setHeaders: {Authorization: this.authToken}}));
+    return next.handle(req.clone({setHeaders: {Authorization: `Bearer ${this.authToken}`}}));
   }
 }

@@ -3,14 +3,18 @@ export interface Project {
   name: string,
   description: string,
   status: ProjectStatus,
-  pmId: number,
-  leaderId: number,
+  pm: {
+    id: number
+  },
+  leader: {
+    id: number
+  },
   entityType: 0,
-  userIds: number[]
+  members: { id: number }[]
 }
 
 export const enum ProjectStatus {
   Pending,
-  Progress,
+  InProgress,
   Done
 }

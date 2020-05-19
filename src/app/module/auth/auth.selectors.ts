@@ -8,6 +8,8 @@ export const isLoggedIn = createSelector(selectAuthState, authState => authState
 
 export const user = createSelector(selectAuthState, authState => authState.user);
 
+export const isAdmin = createSelector(user,  user => user?.isAdmin);
+
 export const userToken = createSelector(user, user => user?.accessToken);
 
 export const userId = createSelector(user, user => {
