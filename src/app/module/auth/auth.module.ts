@@ -6,10 +6,16 @@ import {EffectsModule} from '@ngrx/effects';
 import {AuthEffects} from './auth.effects';
 import {LoginComponent} from './component/login/login.component';
 import {AuthRoutingModule} from "./auth-routing.module";
-import {NzButtonModule, NzCardModule, NzFormModule, NzInputModule, NzRadioModule} from "ng-zorro-antd";
+import {
+  NzButtonModule,
+  NzCardModule,
+  NzFormModule,
+  NzInputModule,
+  NzNotificationModule,
+  NzRadioModule
+} from "ng-zorro-antd";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SignupComponent} from "./component/signup/signup.component";
-
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -24,6 +30,7 @@ import {SignupComponent} from "./component/signup/signup.component";
         NzInputModule,
         NzCardModule,
         NzRadioModule,
+        NzNotificationModule
     ]
 })
 export class AuthModule {

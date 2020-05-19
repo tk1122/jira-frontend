@@ -1,10 +1,10 @@
 <div class="box">
   <nz-card style="width:300px;" class="login-form">
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="login()">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
           <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+            <input type="text" nz-input formControlName="username" placeholder="Username" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
@@ -22,6 +22,6 @@
     </form>
   </nz-card>
 </div>
-<button nz-button nzType="primary" (click)="login()">Login</button>
+<button nz-button nzType="primary" (click)="submitForm()">Login</button>
 <a routerLink="../issues">Issues</a>
 
