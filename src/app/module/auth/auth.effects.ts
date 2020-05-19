@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import {Store} from "@ngrx/store";
 import {AuthService} from "./auth.service";
 import {AuthActions} from "./auth.actions";
-import {exhaustMap, map, tap} from "rxjs/operators";
+import {catchError, exhaustMap, map, tap} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {AuthInfo} from "../../../shared/model/auth-info";
 
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
-
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
@@ -27,7 +27,13 @@ export class AuthEffects implements OnInitEffects {
     return this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
       tap((action => {
+        this.notification.create(
+          'success',
+          'Đăng nhập thành công',
+          ''
+        );
         localStorage.setItem('user', JSON.stringify(action.user));
+        localStorage.setItem('accessToken', JSON.stringify(action.user.accessToken));
         this.router.navigateByUrl('/issues').then()
       }))
     )
@@ -76,7 +82,8 @@ export class AuthEffects implements OnInitEffects {
   constructor(private actions$: Actions,
               private readonly store: Store,
               private readonly authService: AuthService,
-              private readonly router: Router
+              private readonly router: Router,
+              private notification: NzNotificationService
   ) {
   }
 

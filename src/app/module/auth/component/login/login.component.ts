@@ -18,13 +18,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      username: [null, [Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true]
     });
   }
 
-  login() {
-    this.store.dispatch(AuthActions.login({username: '', password: ''}))
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+      console.log(this.validateForm.value);
+      this.store.dispatch(AuthActions.login(this.validateForm.value))
+    }
   }
 }
