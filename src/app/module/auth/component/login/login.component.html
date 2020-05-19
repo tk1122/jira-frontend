@@ -17,7 +17,7 @@
       </nz-form-item>
       <div nz-row class="login-form-margin">
       </div>
-      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [disabled]="!validateForm.valid">Log in</button>
       Or <a routerLink="/signup"> register now! </a>
     </form>
   </nz-card>

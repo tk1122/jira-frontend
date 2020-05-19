@@ -7,11 +7,11 @@
   </div>
   <div nz-col nzSpan="12">
     <ul nz-menu nzMode="horizontal" nzTheme="dark">
-      <li nz-menu-item routerLink="/issues" nzSelected>
+      <li nz-menu-item routerLink="/issues" nzSelected *ngIf="!(isAdmin$|async)">
         Your work
       </li>
-      <li nz-menu-item routerLink="/projects">
-        Project
+      <li nz-menu-item routerLink="/projects" *ngIf="!(isAdmin$|async)">
+        Projects
       </li>
       <li nz-menu-item>
         People
