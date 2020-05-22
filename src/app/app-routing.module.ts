@@ -13,6 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./module/issue/issue.module').then(m => m.IssueModule),
     canActivate: [AuthGaurd]
   },
+  {path: 'project/:id', loadChildren: () => import('./module/epic/epic.module').then(m => m.EpicModule)},
   {path: 'unauthorized-access', component: UnauthorizedAccessComponent},
   {path: 'users', loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
   {
