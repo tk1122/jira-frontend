@@ -1,13 +1,10 @@
+import {BaseContentModel} from "./base.model";
 
-
-export interface Epic {
-  id: number,
-  createdAt: Date,
-  updatedAt: Date,
-  name: string,
-  description: string,
+export interface Epic extends BaseContentModel {
   startDate: Date,
   endDate: Date,
-  entityType: 1,
+  entityType: EpicEntityType,
   projectId: number
 }
+
+export type EpicEntityType = 1;

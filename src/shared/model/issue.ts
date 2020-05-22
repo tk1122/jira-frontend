@@ -1,36 +1,37 @@
-export interface Issue {
-  id: number,
-  name: string,
-  description: string,
+import {BaseContentModel} from "./base.model";
+
+export interface Issue extends BaseContentModel {
+  entityType: IssueEntityType
+  storyPoint: number,
+  status: IssueStatus,
+  priority: IssuePriority,
+  type: IssueType,
   assigneeId: number,
   reporterId: number,
-  storyPoint: number,
-  priority: IssuePriority,
+  projectId: number,
+  epicId: number,
   sprintId: number,
-  type: IssueType,
-  status: IssueStatus,
-  entityType: ISSUE_ENTITY_TYPE
+  labelIds: number[]
 }
 
-export const enum IssuePriority {
+export enum IssueStatus {
+  Todo,
+  Doing,
+  Testing,
+  Done,
+}
+
+export enum IssuePriority {
   Low,
   Medium,
-  High
+  High,
 }
 
-export const enum IssueType {
+export enum IssueType {
   Story,
   Task,
-  Bug
+  Bug,
 }
 
-export const enum IssueStatus {
-  Todo,
-  InProgress,
-  Done,
-  Checking,
-  Finished,
-  Reopened
-}
+export type IssueEntityType = 3;
 
-export type ISSUE_ENTITY_TYPE = 3;

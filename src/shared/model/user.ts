@@ -1,27 +1,26 @@
 import {Role} from "./role";
+import {BaseModel} from "./base.model";
 
-export interface User {
+export interface User extends BaseModel {
   username: string,
-  id: number,
-  fullname: string,
+  fullname: string | null,
   status: UserStatus,
-  skill: string,
-  level: string,
-  email: string,
-  age: number,
   gender: UserGender,
-  roles: Role[],
+  skill: string | null,
+  level: string | null,
+  email: string | null,
+  age: number | null,
 }
 
 
-export const enum UserGender {
-  Male,
-  Female,
-  Others
-}
-
-export const enum UserStatus {
+export enum UserStatus {
   Unactivated,
   Activated,
   Blocked,
+}
+
+export enum UserGender {
+  Male,
+  Female,
+  Others,
 }

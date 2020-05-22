@@ -1,20 +1,18 @@
-export interface Project {
-  id: number,
-  name: string,
-  description: string,
+import {BaseModel} from "./base.model";
+
+export interface Project extends BaseModel {
   status: ProjectStatus,
-  pm: {
-    id: number
-  },
-  leader: {
-    id: number
-  },
-  entityType: 0,
-  members: { id: number }[]
+  entityType: ProjectEntityType,
+  pmId: number,
+  leaderId: number,
+  memberIds: number[]
 }
 
-export const enum ProjectStatus {
+export enum ProjectStatus {
   Pending,
   InProgress,
-  Done
+  Done,
 }
+
+export type ProjectEntityType = 0;
+
