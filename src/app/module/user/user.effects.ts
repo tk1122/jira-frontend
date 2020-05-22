@@ -38,18 +38,18 @@ export class UserEffects {
     ofType(loadUserFailure),
   ), {dispatch: false})
 
-  updateUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(updateUser),
-      switchMap(({user: {id, changes: {status, skill, level}}}) =>
-        this.userService.updateUser(id, status, skill, level).pipe(
-          map(user => updateUserSuccess({}),
-            catchError((err: ErrorMessage) => of(updateUserFailure({error: err})))
-          )
-        )
-      )
-    )
-  )
+  // updateUser$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(updateUser),
+  //     switchMap(({user: {id, changes: {status, skill, level}}}) =>
+  //       this.userService.updateUser(id, status, skill, level).pipe(
+  //         map(user => updateUserSuccess({}),
+  //           catchError((err: ErrorMessage) => of(updateUserFailure({error: err})))
+  //         )
+  //       )
+  //     )
+  //   )
+  // )
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
   }

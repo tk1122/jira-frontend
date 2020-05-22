@@ -42,6 +42,9 @@ export class AuthEffects implements OnInitEffects {
       tap((action => {
         localStorage.setItem('user', JSON.stringify(action.user));
         localStorage.setItem('accessToken', JSON.stringify(action.user.accessToken));
+        if (action.user.isAdmin) {
+          return this.router.navigateByUrl('/users').then()
+        }
         this.router.navigateByUrl('/issues').then()
       }))
     )

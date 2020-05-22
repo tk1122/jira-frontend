@@ -9,13 +9,6 @@ export const issues = createSelector(
   issueEntityAdapter.getSelectors().selectAll
 )
 
-export const finishedIssues = createSelector(
-  issues,
-  issues => {
-    return issues.filter(i => i.status === IssueStatus.Finished)
-  }
-)
-
 export const todoIssues = createSelector(
   issues,
   issues => {
@@ -23,24 +16,17 @@ export const todoIssues = createSelector(
   }
 )
 
-export const inProgressIssues = createSelector(
+export const doingIssues = createSelector(
   issues,
   issues => {
-    return issues.filter(i => i.status === IssueStatus.InProgress)
+    return issues.filter(i => i.status === IssueStatus.Doing)
   }
 )
 
-export const checkingIssues = createSelector(
+export const testingIssues = createSelector(
   issues,
   issues => {
-    return issues.filter(i => i.status === IssueStatus.Checking)
-  }
-)
-
-export const reopenedIssues = createSelector(
-  issues,
-  issues => {
-    return issues.filter(i => i.status === IssueStatus.Reopened)
+    return issues.filter(i => i.status === IssueStatus.Testing)
   }
 )
 
