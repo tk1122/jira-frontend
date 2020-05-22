@@ -11,7 +11,7 @@ import {
   updateUserFailure,
   updateUserSuccess
 } from "./user.actions";
-import {catchError, filter, map, switchMap, withLatestFrom} from "rxjs/operators";
+import {catchError, filter, map, switchMap, tap, withLatestFrom} from "rxjs/operators";
 import {UserService} from "./user.service";
 import {of} from "rxjs";
 import {ErrorMessage} from "../../../shared/model/error-message";
@@ -28,6 +28,7 @@ export class UserEffects {
       filter(([_, isLoaded]) => !isLoaded),
       switchMap(([action, _]) => this.userService.loadUsers().pipe(
         map(users => loadUsersSuccess({users})),
+        tap(user => console.log(user)),
         catchError((err: ErrorMessage) => of(loadUserFailure({error: err})))
       ))
     )
