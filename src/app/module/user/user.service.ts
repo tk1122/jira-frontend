@@ -22,7 +22,7 @@ export class UserService {
     }
     params.append('limit', '50')
 
-    return this.httpClient.get<User[]>(`${environment}/users`, {params})
+    return this.httpClient.get<User[]>(`${environment.url}/users`, {params})
   }
 
   updateUser(userId: number | string, status?: UserStatus, skill?: string, level?: string) {

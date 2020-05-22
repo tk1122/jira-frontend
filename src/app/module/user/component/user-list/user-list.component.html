@@ -1,0 +1,20 @@
+<nz-table #basicTable [nzData]="users$ | async">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Lead</th>
+    <th>PM</th>
+    <th>Edit</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td class="issue-name">{{ data.fullname }}</td>
+    <td>{{ data.description }}</td>
+    <td>{{ data.leaderId }}</td>
+    <td>{{ data.pmId }}</td>
+    <td><a><i nz-icon nzType="edit" nzTheme="outline"></i></a></td>
+  </tr>
+  </tbody>
+</nz-table>
