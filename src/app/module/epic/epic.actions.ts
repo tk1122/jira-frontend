@@ -16,3 +16,8 @@ export const loadEpicFailure = createAction(
   '[Epic API] Load Epics failure',
   props<{ message: ErrorMessage }>()
 )
+
+export const selectEpic = createAction(
+  '[Epic Page] Load epic selected',
+  props<{ id: number }>()
+)

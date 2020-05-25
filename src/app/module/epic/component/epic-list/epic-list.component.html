@@ -10,7 +10,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
-    <td class="issue-name">{{ data.name }}</td>
+    <td class="epic-name" (click)="handleClick(data.id)">{{ data.name }}</td>
     <td>{{data.startDate | date}}</td>
     <td>{{ data.endDate | date}}</td>
     <td>
