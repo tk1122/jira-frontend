@@ -1,17 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {loadProjectFailure, loadProjects, loadProjectsSuccess} from "./project.actions";
 import {catchError, filter, map, switchMap, withLatestFrom} from "rxjs/operators";
 import {ProjectService} from "./project.service";
 import {UserService} from "../user/user.service";
-import {select, Store} from "@ngrx/store";
+import {Action, select, Store} from "@ngrx/store";
 import {isProjectsLoaded} from "./project.selectors";
 import {ErrorMessage} from "../../../shared/model/error-message";
 import {of} from "rxjs";
+import {userId} from "../auth/auth.selectors";
 
 
 @Injectable()
-export class ProjectEffects {
+export class ProjectEffects{
 
   loadProjects$ = createEffect(() =>
     this.actions$.pipe(
@@ -37,5 +38,4 @@ export class ProjectEffects {
 
   constructor(private actions$: Actions, private readonly projectService: ProjectService, private readonly userService: UserService, private readonly store: Store) {
   }
-
 }

@@ -1,17 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {loadIssues} from "../../issue.actions";
-import {userId} from "../../../auth/auth.selectors";
-import {tap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {Issue} from "../../../../../shared/model/issue";
-import {
-  doneIssues,
-  issues,
-  doingIssues,
-  testingIssues,
-  todoIssues
-} from "../../issue.selectors";
+import {doingIssues, doneIssues, issues, testingIssues, todoIssues} from "../../issue.selectors";
 
 
 @Component({
@@ -30,14 +21,6 @@ export class IssueComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.pipe(
-      select(userId),
-      tap((userId) => {
-        if (userId) {
-          this.store.dispatch(loadIssues({assineeId: userId}))
-        }
-      })).subscribe()
-
     this.allIssues$ = this.store.pipe(
       select(issues)
     )

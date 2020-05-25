@@ -12,7 +12,7 @@ export class IssueService {
   }
 
 
-  getIssuesByAssigneeId(assigneeId: number) {
-    return this.httpClient.get<Issue[]>(`environment.url/issues`)
+  getIssuesByAssigneeId() {
+    return this.httpClient.get<Issue[]>(`${environment.url}/issues`)
   }
 }
