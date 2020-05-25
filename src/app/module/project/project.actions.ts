@@ -47,3 +47,8 @@ export const updateProjectFailure = createAction(
   '[Project API] Update project failure',
   props<{ message: ErrorMessage }>()
 )
+
+export const selectedProject = createAction(
+  '[Project Page] Load project selected',
+  props<{ id: number }>()
+)

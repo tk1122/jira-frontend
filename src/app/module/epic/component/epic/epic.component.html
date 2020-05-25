@@ -1,2 +1,11 @@
-<p>epic works!</p>
-<app-epic-list></app-epic-list>
+<app-header></app-header>
+<nz-layout>
+  <nz-sider nzWidth="200px" nzTheme="light">
+    <app-epic-sidebar></app-epic-sidebar>
+  </nz-sider>
+  <nz-layout class="inner-layout">
+    <nz-content>
+      <app-epic-list></app-epic-list>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

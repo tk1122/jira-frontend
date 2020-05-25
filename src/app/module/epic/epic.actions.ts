@@ -4,7 +4,7 @@ import {ErrorMessage} from "../../../shared/model/error-message";
 
 export const loadEpics = createAction(
   '[Epic Page] Load Epics',
-  props<{ userId: number }>()
+  props<{ projectId: string }>()
 )
 
 export const loadEpicsSuccess = createAction(
