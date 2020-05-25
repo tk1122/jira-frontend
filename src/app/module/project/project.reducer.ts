@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {Project} from "../../../shared/model/project";
-import {createProject, loadProjectsSuccess, selectedProject, updateProject} from "./project.actions";
+import {createProject, loadProjectsSuccess, selectProject, updateProject} from "./project.actions";
 import {logout} from "../auth/auth.actions";
 
 
@@ -22,7 +22,7 @@ export const reducer = createReducer(
     ...state,
     isProjectsLoaded: true
   })),
-  on(selectedProject, (state, {id}) => ({...state, selectedProjectId: id})),
+  on(selectProject, (state, {id}) => ({...state, selectedProjectId: id})),
   on(logout, state => projectEntityAdapter.removeAll({...state, isProjectsLoaded: false})),
   on(createProject, (state, {project}) => projectEntityAdapter.addOne(project, state)),
   on(updateProject, (state, {project}) => projectEntityAdapter.updateOne(project, state)),

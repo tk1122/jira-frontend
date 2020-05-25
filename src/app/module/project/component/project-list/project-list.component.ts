@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Project} from "../../../../../shared/model/project";
 import {select, Store} from "@ngrx/store";
-import {loadProjects, selectedProject} from "../../project.actions";
+import {loadProjects, selectProject} from "../../project.actions";
 import {userId} from "../../../auth/auth.selectors";
 import {projects} from "../../project.selectors";
 import {Router} from "@angular/router";
@@ -33,8 +33,8 @@ export class ProjectListComponent implements OnInit {
   }
 
   handleClick(id: number) {
-    this.router.navigate(['/projects', id, 'epics'])
+    this.router.navigate(['/projects', id])
     console.log(id);
-    this.store.dispatch(selectedProject({id}))
+    this.store.dispatch(selectProject({id}))
   }
 }

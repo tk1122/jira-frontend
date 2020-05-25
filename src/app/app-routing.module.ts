@@ -6,7 +6,7 @@ import {IssueModuleGaurd} from "./module/auth/auth.gaurd";
 
 
 const routes: Routes = [
-  // {path: '', pathMatch: 'full', redirectTo: '/issues'},
+  {path: '', pathMatch: 'full', redirectTo: '/login'},
   {
     path: 'projects/:id',
     loadChildren: () => import('./module/epic/epic.module').then(m => m.EpicModule)
