@@ -3,6 +3,7 @@ import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {User} from "../../../shared/model/user";
 import {loadRolesSuccess, loadUsersSuccess, selectUser, updateUser} from "./user.actions";
 import {Role} from "../../../shared/model/role";
+import {logout} from "../auth/auth.actions";
 
 
 export const userFeatureKey = 'user';
@@ -35,7 +36,8 @@ export const userReducer = createReducer(
     isUsersLoaded: true
   })),
   on(selectUser, (state, {id}) => ({...state, selectedUserId: id})),
-  on(updateUser, (state, {user}) => userEntityAdapter.updateOne(user, state))
+  on(updateUser, (state, {user}) => userEntityAdapter.updateOne(user, state)),
+  on(logout, state => userEntityAdapter.removeAll({...state, selectedUserId: undefined, isUsersLoaded: false}))
 );
 
 export const roleReducer = createReducer(
@@ -44,5 +46,6 @@ export const roleReducer = createReducer(
     ...state,
     isRolesLoaded: true
   })),
+  on(logout, state => roleEntityAdapter.removeAll({...state, isRolesLoaded: false}))
 )
 
