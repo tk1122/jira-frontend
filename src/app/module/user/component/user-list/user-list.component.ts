@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {select, Store} from "@ngrx/store";
 import {User} from "../../../../../shared/model/user";
-import {userId} from "../../../auth/auth.selectors";
-import {loadProjects} from "../../../project/project.actions";
-import {projects} from "../../../project/project.selectors";
+import {isAdmin, userId} from "../../../auth/auth.selectors";
 import {loadUsers} from "../../user.actions";
 import {users} from "../../user.selectors";
 
@@ -15,6 +13,7 @@ import {users} from "../../user.selectors";
 })
 export class UserListComponent implements OnInit {
   users$: Observable<User[]> = of([])
+  isAdmin$: Observable<boolean | undefined> = of(false)
 
   constructor(
     private readonly store: Store
@@ -29,6 +28,7 @@ export class UserListComponent implements OnInit {
     })
 
     this.users$ = this.store.pipe(select(users))
+    this.isAdmin$ = this.store.pipe(select(isAdmin))
   }
 
 }

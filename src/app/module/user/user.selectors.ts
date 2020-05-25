@@ -20,5 +20,5 @@ export const roles = createSelector(selectRoleState, roleEntityAdapter.getSelect
 
 export const isRolesLoaded = createSelector(selectRoleState, s1 => s1.isRolesLoaded)
 
-export const user = createSelector(selectUserState, (s1: UserState, props: any) => s1.entities[props.id])
+export const user = createSelector(selectUserState, (s1: UserState, props: { id: number }) => s1.entities[props.id])
 
