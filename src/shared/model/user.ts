@@ -10,6 +10,7 @@ export interface User extends BaseModel {
   level: string | null,
   email: string | null,
   age: number | null,
+  roleIds: number[]
 }
 
 

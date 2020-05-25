@@ -8,14 +8,15 @@ import * as fromUser from './user.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {RoleEffects, UserEffects} from './user.effects';
 import {UserListComponent} from './component/user-list/user-list.component';
-import {NzDescriptionsModule, NzGridModule, NzIconModule, NzTableModule} from "ng-zorro-antd";
+import {NzDescriptionsModule, NzGridModule, NzIconModule, NzTableModule, NzTagModule} from "ng-zorro-antd";
 import {SharedComponentModule} from "../shared-component/shared-component.module";
 import {UserStatusPipe} from "./pipe/user-status.pipe";
-import { UserDetailComponent } from './component/user-detail/user-detail.component';
+import {UserDetailComponent} from './component/user-detail/user-detail.component';
+import {UserGenderPipe} from "./pipe/user-gender.pipe";
 
 
 @NgModule({
-  declarations: [UserComponent, UserListComponent, UserStatusPipe, UserDetailComponent],
+  declarations: [UserComponent, UserListComponent, UserStatusPipe, UserDetailComponent, UserGenderPipe],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -26,7 +27,8 @@ import { UserDetailComponent } from './component/user-detail/user-detail.compone
     NzIconModule,
     SharedComponentModule,
     NzGridModule,
-    NzDescriptionsModule
+    NzDescriptionsModule,
+    NzTagModule
   ]
 })
 export class UserModule {

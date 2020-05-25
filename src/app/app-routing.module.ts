@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'issues',
     loadChildren: () => import('./module/issue/issue.module').then(m => m.IssueModule),
-    canActivate: [IssueModuleGaurd]
+    canLoad: [IssueModuleGaurd]
   },
   {path: 'unauthorized-access', component: UnauthorizedAccessComponent},
   {path: 'users', loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},

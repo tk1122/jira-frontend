@@ -34,6 +34,11 @@ export const loadRolesFailure = createAction(
   props<{ error: ErrorMessage }>()
 )
 
+export const selectUser = createAction(
+  '[User Page] Select user',
+  props<{ id: number }>()
+)
+
 export const updateUser = createAction(
   '[User Info Page] Update user',
   props<{ user: Update<User> }>()

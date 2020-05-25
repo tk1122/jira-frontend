@@ -1,9 +1,15 @@
-<nz-descriptions [nzTitle]="">
-  <nz-descriptions-item [nzTitle]="">Zhou Maomao</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Telephone">18100000000</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Live">Hangzhou, Zhejiang</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Remark">Empty</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Address">
-    No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-  </nz-descriptions-item>
+<nz-descriptions nzTitle="{{(selectedUser$ | async)?.fullname}}">
+  <nz-descriptions-item nzTitle="Username">{{(selectedUser$ | async)?.username}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Email">{{(selectedUser$ | async)?.email}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Status">{{(selectedUser$ | async)?.status | userStatus}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Gender">{{(selectedUser$ | async)?.gender | userGender}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Age">{{(selectedUser$ | async)?.age}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Skill">{{(selectedUser$ | async)?.skill}}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Level">{{(selectedUser$ | async)?.level}}</nz-descriptions-item>
 </nz-descriptions>
+<div>
+  Roles:
+  <span *ngFor="let role of selectedUserRoles$ | async">
+      <nz-tag>{{role.name}}</nz-tag>
+  </span>
+</div>

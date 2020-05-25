@@ -1,26 +1,23 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {
   loadRoles,
   loadRolesFailure,
   loadRolesSuccess,
   loadUserFailure,
   loadUsers,
-  loadUsersSuccess,
-  updateUser,
-  updateUserFailure,
-  updateUserSuccess
+  loadUsersSuccess
 } from "./user.actions";
 import {catchError, filter, map, switchMap, tap, withLatestFrom} from "rxjs/operators";
 import {UserService} from "./user.service";
 import {of} from "rxjs";
 import {ErrorMessage} from "../../../shared/model/error-message";
-import {select, Store} from "@ngrx/store";
+import {Action, select, Store} from "@ngrx/store";
 import {isRolesLoaded, isUsersLoaded} from "./user.selectors";
 
 
 @Injectable()
-export class UserEffects {
+export class UserEffects implements OnInitEffects {
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUsers),
@@ -53,10 +50,14 @@ export class UserEffects {
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
   }
+
+  ngrxOnInitEffects(): Action {
+    return loadUsers({});
+  }
 }
 
 @Injectable()
-export class RoleEffects {
+export class RoleEffects implements OnInitEffects {
 
   loadRoles$ = createEffect(() =>
     this.actions$.pipe(
@@ -76,5 +77,9 @@ export class RoleEffects {
 
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
+  }
+
+  ngrxOnInitEffects(): Action {
+    return loadRoles({});
   }
 }

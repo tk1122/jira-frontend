@@ -21,12 +21,6 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.pipe(select(userId)).subscribe(userId => {
-      if (userId) {
-        this.store.dispatch(loadUsers({}))
-      }
-    })
-
     this.users$ = this.store.pipe(select(users))
     this.isAdmin$ = this.store.pipe(select(isAdmin))
   }
