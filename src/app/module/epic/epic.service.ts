@@ -16,6 +16,6 @@ export class EpicService {
       params.append('projectId', projectId);
     }
 
-    return this.httpClient.get<Epic[]>(`${environment.url}/epics`, {params})
+    return this.httpClient.get<Epic[]>(`${environment.url}/epics?projectId=${projectId}`)
   }
 }

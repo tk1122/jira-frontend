@@ -19,7 +19,7 @@ export class EpicEffects {
       withLatestFrom(this.store.pipe(select(isEpicsLoaded))),
       filter(([_, isLoaded]) => !isLoaded),
       switchMap(([action, _]) =>
-        this.epicService.getEpicByProjectId().pipe(
+        this.epicService.getEpicByProjectId(action.projectId.toString()).pipe(
           map(epics => {
             return loadEpicsSuccess({epics})
           }),

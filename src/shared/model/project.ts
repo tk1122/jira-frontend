@@ -1,6 +1,6 @@
-import {BaseModel} from "./base.model";
+import {BaseContentModel} from "./base.model";
 
-export interface Project extends BaseModel {
+export interface Project extends BaseContentModel {
   status: ProjectStatus,
   entityType: ProjectEntityType,
   pmId: number,
