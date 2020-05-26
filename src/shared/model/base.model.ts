@@ -1,7 +1,7 @@
 export interface BaseModel {
   id: number
-  createdAt: Date,
-  updatedAt: Date,
+  createdAt?: Date,
+  updatedAt?: Date,
 }
 
 export interface BaseContentModel extends BaseModel {

@@ -1,5 +1,5 @@
 export interface ErrorMessage {
-  code: string,
+  statusCode: number,
   message: string,
-  type: string
+  error: string
 }

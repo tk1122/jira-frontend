@@ -11,11 +11,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         tap((res) => {
           console.log(res)
         }),
-        catchError((error: HttpErrorResponse) => {
+        catchError((res: HttpErrorResponse) => {
           const errorMessage: ErrorMessage = {
-            message: error.error.message || 'Network Error',
-            code: error.error.statusCode,
-            type: error.error.error,
+            message: res.error.message,
+            statusCode: res.error.statusCode,
+            error: res.error.error || 'Network Error',
           }
 
           return throwError(errorMessage);

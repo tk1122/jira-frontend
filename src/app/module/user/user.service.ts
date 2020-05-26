@@ -25,17 +25,12 @@ export class UserService {
     return this.httpClient.get<User[]>(`${environment.url}/users`, {params})
   }
 
-  updateUser(userId: number | string, status?: UserStatus, skill?: string, level?: string) {
+  updateUser(userId: number | string, roleIds?: number[], status?: UserStatus | null, skill?: string | null, level?: string | null) {
     return this.httpClient.put<User>(`${environment.url}/users/${userId}`, {
+      roleIds,
       skill,
       status,
       level
-    })
-  }
-
-  updateUserRoles(userId: number, roleIds: number[]) {
-    return this.httpClient.put<User>(`${environment.url}/users/${userId}/roles`, {
-      roleIds
     })
   }
 }

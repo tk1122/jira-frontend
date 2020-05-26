@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () => import('./module/issue/issue.module').then(m => m.IssueModule),
     canLoad: [IssueModuleGaurd]
   },
+  {
+    path: 'sprints',
+    loadChildren: () => import('./module/sprint/sprint.module').then(m => m.SprintModule)
+  },
   {path: 'unauthorized-access', component: UnauthorizedAccessComponent},
   {path: 'users', loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
   {

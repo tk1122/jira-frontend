@@ -32,7 +32,7 @@ export class AuthEffects implements OnInitEffects {
   loginFailure$ = createEffect(() => this.actions$.pipe(
     ofType(loginFailure),
     tap((action) => {
-      this.notification.error(action.message.message, '')
+      this.notification.error(action.message.error, '')
     })
   ), {dispatch: false})
 
@@ -42,8 +42,6 @@ export class AuthEffects implements OnInitEffects {
       tap((action => {
         localStorage.setItem('user', JSON.stringify(action.user));
         localStorage.setItem('accessToken', JSON.stringify(action.user.accessToken));
-        console.log('user ', action.user);
-        console.log('path ', action.path);
         if (action.user.isAdmin) {
           if (action.path) {
             return this.router.navigateByUrl(action.path).then()
@@ -55,7 +53,6 @@ export class AuthEffects implements OnInitEffects {
         if (action.path) {
           return this.router.navigateByUrl(action.path).then()
         }
-        console.log('navaigate to /issues')
         return this.router.navigateByUrl('/issues').then()
       }))
     )

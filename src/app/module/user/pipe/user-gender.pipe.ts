@@ -9,7 +9,7 @@ export class UserGenderPipe implements PipeTransform {
         return 'Male'
       case UserGender.Female:
         return 'Female'
-      case UserGender.Others:
+      case UserGender.Other:
         return 'Other'
     }
   }
