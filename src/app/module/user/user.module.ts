@@ -7,13 +7,25 @@ import {StoreModule} from '@ngrx/store';
 import * as fromUser from './user.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {RoleEffects, UserEffects} from './user.effects';
-import { UserListComponent } from './component/user-list/user-list.component';
-import {NzIconModule, NzTableModule} from "ng-zorro-antd";
+import {UserListComponent} from './component/user-list/user-list.component';
+import {
+  NzButtonModule,
+  NzDescriptionsModule,
+  NzFormModule,
+  NzGridModule,
+  NzIconModule, NzInputModule, NzSelectModule,
+  NzTableModule,
+  NzTagModule
+} from "ng-zorro-antd";
 import {SharedComponentModule} from "../shared-component/shared-component.module";
+import {UserStatusPipe} from "./pipe/user-status.pipe";
+import {UserDetailComponent} from './component/user-detail/user-detail.component';
+import {UserGenderPipe} from "./pipe/user-gender.pipe";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [UserComponent, UserListComponent],
+  declarations: [UserComponent, UserListComponent, UserStatusPipe, UserDetailComponent, UserGenderPipe],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -23,6 +35,12 @@ import {SharedComponentModule} from "../shared-component/shared-component.module
     NzTableModule,
     NzIconModule,
     SharedComponentModule,
+    NzGridModule,
+    NzFormModule,
+    NzSelectModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    NzButtonModule
   ]
 })
 export class UserModule {

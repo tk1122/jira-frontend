@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType, OnInitEffects} from '@ngrx/effects';
 import {
   loadRoles,
   loadRolesFailure,
@@ -15,12 +15,13 @@ import {catchError, filter, map, switchMap, tap, withLatestFrom} from "rxjs/oper
 import {UserService} from "./user.service";
 import {of} from "rxjs";
 import {ErrorMessage} from "../../../shared/model/error-message";
-import {select, Store} from "@ngrx/store";
+import {Action, select, Store} from "@ngrx/store";
 import {isRolesLoaded, isUsersLoaded} from "./user.selectors";
+import {NzNotificationService} from "ng-zorro-antd";
 
 
 @Injectable()
-export class UserEffects {
+export class UserEffects implements OnInitEffects {
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUsers),
@@ -28,7 +29,6 @@ export class UserEffects {
       filter(([_, isLoaded]) => !isLoaded),
       switchMap(([action, _]) => this.userService.loadUsers().pipe(
         map(users => loadUsersSuccess({users})),
-        tap(user => console.log(user)),
         catchError((err: ErrorMessage) => of(loadUserFailure({error: err})))
       ))
     )
@@ -41,22 +41,43 @@ export class UserEffects {
   updateUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateUser),
-      switchMap(({user: {id, changes: {status, skill, level}}}) =>
-        this.userService.updateUser(id, status, skill, level).pipe(
-          map(user => updateUserSuccess({}),
-            catchError((err: ErrorMessage) => of(updateUserFailure({error: err})))
-          )
+      switchMap(({user: {id, changes: {status, skill, level, roleIds}}}) =>
+        this.userService.updateUser(id, roleIds, status, skill, level).pipe(
+          map(user => updateUserSuccess({})),
+          catchError((err: ErrorMessage) => {
+            return of(updateUserFailure({error: err}))
+          })
         )
       )
     )
   )
 
-  constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
+  updateUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUserSuccess),
+      tap(() => this.notification.success('Update user success', ''))
+    ), {dispatch: false}
+  )
+
+  updateUserFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUserFailure),
+      tap(({error: {error}}) => {
+        this.notification.error(error, '')
+      })
+    ), {dispatch: false}
+  )
+
+  constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store, private readonly notification: NzNotificationService) {
+  }
+
+  ngrxOnInitEffects(): Action {
+    return loadUsers({});
   }
 }
 
 @Injectable()
-export class RoleEffects {
+export class RoleEffects implements OnInitEffects {
 
   loadRoles$ = createEffect(() =>
     this.actions$.pipe(
@@ -76,5 +97,9 @@ export class RoleEffects {
 
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
+  }
+
+  ngrxOnInitEffects(): Action {
+    return loadRoles({});
   }
 }

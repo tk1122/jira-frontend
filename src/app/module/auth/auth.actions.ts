@@ -12,7 +12,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Auth API] Login Success',
-  props<{ user: AuthInfo }>()
+  props<{ user: AuthInfo, path? : string }>()
 );
 
 export const loginFailure = createAction(

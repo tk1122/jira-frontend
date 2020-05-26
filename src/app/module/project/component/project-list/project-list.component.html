@@ -10,7 +10,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
-    <td class="issue-name">{{ data.name }}</td>
+    <td class="project-name" (click)="handleClick(data.id)">{{ data.name }}</td>
     <td>{{ data.description }}</td>
     <td>{{ data.leaderId }}</td>
     <td>{{ data.pmId }}</td>
@@ -18,3 +18,4 @@
   </tr>
   </tbody>
 </nz-table>
+<router-outlet></router-outlet>

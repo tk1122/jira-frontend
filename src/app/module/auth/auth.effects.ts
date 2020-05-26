@@ -9,11 +9,11 @@ import {Router} from "@angular/router";
 import {AuthInfo} from "../../../shared/model/auth-info";
 import {ErrorMessage} from "../../../shared/model/error-message";
 import {of} from "rxjs";
+import {Location} from "@angular/common";
 
 
 @Injectable()
 export class AuthEffects implements OnInitEffects {
-
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
@@ -32,7 +32,7 @@ export class AuthEffects implements OnInitEffects {
   loginFailure$ = createEffect(() => this.actions$.pipe(
     ofType(loginFailure),
     tap((action) => {
-      this.notification.error(action.message.message, '')
+      this.notification.error(action.message.error, '')
     })
   ), {dispatch: false})
 
@@ -42,7 +42,18 @@ export class AuthEffects implements OnInitEffects {
       tap((action => {
         localStorage.setItem('user', JSON.stringify(action.user));
         localStorage.setItem('accessToken', JSON.stringify(action.user.accessToken));
-        this.router.navigateByUrl('/issues').then()
+        if (action.user.isAdmin) {
+          if (action.path) {
+            return this.router.navigateByUrl(action.path).then()
+          }
+
+          return this.router.navigateByUrl('/users').then()
+        }
+
+        if (action.path) {
+          return this.router.navigateByUrl(action.path).then()
+        }
+        return this.router.navigateByUrl('/issues').then()
       }))
     )
   }, {dispatch: false})
@@ -87,11 +98,13 @@ export class AuthEffects implements OnInitEffects {
     )
   }, {dispatch: false})
 
+
   constructor(private actions$: Actions,
               private readonly store: Store,
               private readonly authService: AuthService,
               private readonly router: Router,
-              private notification: NzNotificationService
+              private readonly notification: NzNotificationService,
+              private readonly location: Location
   ) {
   }
 
@@ -101,7 +114,8 @@ export class AuthEffects implements OnInitEffects {
       return logout();
     }
 
+
     const parsedUser = JSON.parse(user) as AuthInfo;
-    return loginSuccess({user: parsedUser});
+    return loginSuccess({user: parsedUser, path: this.location.path()});
   }
 }

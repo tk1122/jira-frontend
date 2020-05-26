@@ -1,12 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { ProjectComponent } from './component/project/project.component';
+import {ProjectComponent} from './component/project/project.component';
 
-const routes: Routes = [{ path: '', component: ProjectComponent }];
+const routes: Routes = [{
+  path: '', component: ProjectComponent,
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProjectRoutingModule { }
+export class ProjectRoutingModule {
+}

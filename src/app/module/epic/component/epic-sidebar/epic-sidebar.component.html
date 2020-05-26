@@ -1,0 +1,19 @@
+
+<ul nz-menu nzMode="inline" class="sider-menu">
+  <li nz-menu-item nzSelected>
+    <i nz-icon nzType="mail"></i>
+    {{(projectSelected$ | async)?.name}}
+  </li>
+  <li nz-menu-item nzSelected>
+    <i nz-icon nzType="mail"></i>
+    Roadmap
+  </li>
+  <li nz-menu-item>
+    <i nz-icon nzType="appstore"></i>
+    Backlog
+  </li>
+  <li nz-menu-item>
+    <i nz-icon nzType="appstore"></i>
+    Board
+  </li>
+</ul>

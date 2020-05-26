@@ -7,16 +7,12 @@ export class IssueStatusPipe implements PipeTransform {
     switch (status) {
       case IssueStatus.Todo:
         return 'Todo'
-      case IssueStatus.Checking:
-        return 'Checking'
+      case IssueStatus.Doing:
+        return 'Doing'
       case IssueStatus.Done:
         return 'Done'
-      case IssueStatus.Finished:
+      case IssueStatus.Testing:
         return 'Finished'
-      case IssueStatus.InProgress:
-        return 'In Progress'
-      case IssueStatus.Reopened:
-        return 'Re Open'
       default:
         return 'Undefined'
     }
