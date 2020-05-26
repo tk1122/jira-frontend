@@ -3,7 +3,7 @@ import {Observable, of} from "rxjs";
 import {Epic} from "../../../../../shared/model/epic";
 import {select, Store} from "@ngrx/store";
 import {userId} from "../../../auth/auth.selectors";
-import {loadEpics} from "../../epic.actions";
+import {loadEpics, selectEpic} from "../../epic.actions";
 import {epics} from "../../epic.selectors";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {filter, map, switchMap, tap, withLatestFrom} from "rxjs/operators";
@@ -40,6 +40,10 @@ export class EpicListComponent implements OnInit {
     })
 
     this.epic$ = this.store.pipe(select(epics))
+  }
+
+  handleClick(id:number) {
+    this.store.dispatch(selectEpic({id}))
   }
 
   showModal(): void {
