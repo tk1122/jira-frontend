@@ -43,7 +43,7 @@ export class UserEffects {
       ofType(updateUser),
       switchMap(({user: {id, changes: {status, skill, level, roleIds}}}) =>
         this.userService.updateUser(id, roleIds, status, skill, level).pipe(
-          map(user => updateUserSuccess({})),
+          map(user => updateUserSuccess()),
           catchError((err: ErrorMessage) => {
             return of(updateUserFailure({error: err}))
           })

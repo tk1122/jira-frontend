@@ -8,7 +8,7 @@ import {isIssuesLoaded, isProjectIssuesLoaded} from "./issue.selectors";
 
 
 @Injectable()
-export class IssueEffects implements OnInitEffects {
+export class IssueEffects{
 
   loadIssues$ = createEffect(() => {
     return this.actions$.pipe(
@@ -39,9 +39,5 @@ export class IssueEffects implements OnInitEffects {
   // })
 
   constructor(private actions$: Actions, private readonly store: Store, private readonly issueService: IssueService) {
-  }
-
-  ngrxOnInitEffects(): Action {
-    return loadIssues({})
   }
 }

@@ -12,7 +12,7 @@ export class UserComponent implements OnInit {
   constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(loadUsers({}))
-    this.store.dispatch(loadRoles({}))
+    this.store.dispatch(loadUsers())
+    this.store.dispatch(loadRoles())
   }
 }
