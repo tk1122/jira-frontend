@@ -18,6 +18,7 @@ import {
 } from "ng-zorro-antd";
 import {SharedComponentModule} from "../shared-component/shared-component.module";
 import { EpicSidebarComponent } from './component/epic-sidebar/epic-sidebar.component';
+import {IssueEffects} from "../issue/issue.effects";
 
 
 
@@ -27,6 +28,7 @@ import { EpicSidebarComponent } from './component/epic-sidebar/epic-sidebar.comp
     CommonModule,
     EpicRoutingModule,
     StoreModule.forFeature(fromEpic.epicFeatureKey, fromEpic.reducer),
+    StoreModule.forFeature(fromEpic.projectIssueFeatureKey, fromEpic.projectIssueReducer),
     EffectsModule.forFeature([EpicEffects]),
     NzTableModule,
     NzIconModule,

@@ -1,6 +1,7 @@
-<nz-table #basicTable [nzData]="epic$ | async" [nzShowPagination]=false>
+<nz-table #nestedTable [nzData]="epic$ | async" [nzPageSize]="10">
   <thead>
   <tr>
+    <th></th>
     <th>Epic</th>
     <th>Start date</th>
     <th>Due date</th>
@@ -9,27 +10,33 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td class="epic-name" (click)="handleClick(data.id)">{{ data.name }}</td>
-    <td>{{data.startDate | date}}</td>
-    <td>{{ data.endDate | date}}</td>
+  <ng-template ngFor let-data [ngForOf]="nestedTable.data">
+    <tr>
+      <td [(nzExpand)]="data.expand"></td>
+      <td class="epic-name" (click)="handleClick(data.id)">{{ data.name }}</td>
+      <td>{{data.startDate | date}}</td>
+      <td>{{ data.endDate | date}}</td>
+      <td>
+        <nz-progress [nzPercent]="data.timeLeft"></nz-progress>
+      </td>
+      <td><a><i nz-icon nzType="eye" nzTheme="outline"></i></a></td>
+    </tr>
+    <tr [nzExpand]="data.expand">
+      <nz-table #innerTable [nzData]="data.issues" nzSize="middle" [nzShowPagination]="false">
+  <tbody>
+  <tr *ngFor="let data of innerTable.data">
+    <td>{{ data.name }}</td>
+    <td>{{ data.description }}</td>
     <td>
-      <nz-progress [nzPercent]="data.timeLeft"></nz-progress>
+
     </td>
-    <td><a><i nz-icon nzType="eye" nzTheme="outline"></i></a></td>
-  </tr>
-  <tr>
-    <td><button nz-button nzType="default" (click)="showModal()"><i nz-icon nzType="plus-circle" nzTheme="twotone"></i>Create Epic</button></td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>
+    </td>
   </tr>
   </tbody>
 </nz-table>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <p>Content one</p>
-  <p>Content two</p>
-  <p>Content three</p>
-  <p>Content three</p>
-</nz-modal>
+</tr>
+</ng-template>
+</tbody>
+</nz-table>

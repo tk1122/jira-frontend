@@ -34,7 +34,5 @@ export class ProjectListComponent implements OnInit {
 
   handleClick(id: number) {
     this.router.navigate(['/projects', id])
-    console.log(id);
-    this.store.dispatch(selectProject({id}))
   }
 }

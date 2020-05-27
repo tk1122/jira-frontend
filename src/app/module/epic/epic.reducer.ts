@@ -3,6 +3,8 @@ import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {Epic} from "../../../shared/model/epic";
 import {loadEpicsSuccess, selectEpic} from './epic.actions'
 import {logout} from "../auth/auth.actions";
+import {Issue} from "../../../shared/model/issue";
+import {loadIssuesByProjectIdSuccess} from "../issue/issue.actions";
 
 
 export const epicFeatureKey = 'epic';
@@ -27,4 +29,19 @@ export const reducer = createReducer(
   // on(updateEpic, (state, {Epic}) => EpicEntityAdapter.updateOne(Epic, state)),
   )
 ;
+
+export const projectIssueFeatureKey = 'projectIssues'
+
+export interface ProjectIssueState extends EntityState<Issue> {
+  isProjectIssuesLoaded: boolean,
+}
+export const projectIssueEntityAdapter = createEntityAdapter<Issue>()
+
+export const initialProjectIssueState: ProjectIssueState = projectIssueEntityAdapter.getInitialState({isProjectIssuesLoaded: false})
+
+export const projectIssueReducer = createReducer(
+  initialProjectIssueState,
+  on(loadIssuesByProjectIdSuccess, (state, {issues}) => projectIssueEntityAdapter.setAll(issues, {...state, isProjectIssuesLoaded: true})),
+  on(logout, (state) => projectIssueEntityAdapter.removeAll({...state, isAllIssuesLoaded: false}))
+);
 

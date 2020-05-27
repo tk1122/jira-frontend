@@ -1,6 +1,7 @@
 import {createAction, props} from "@ngrx/store";
 import {Epic} from "../../../shared/model/epic";
 import {ErrorMessage} from "../../../shared/model/error-message";
+import {Issue} from "../../../shared/model/issue";
 
 export const loadEpics = createAction(
   '[Epic Page] Load Epics',
@@ -21,3 +22,13 @@ export const selectEpic = createAction(
   '[Epic Page] Load epic selected',
   props<{ id: number }>()
 )
+
+export const loadIssuesByProjectId = createAction(
+  '[Issue Page] Load Issues By Project',
+  props<{projectId:string}>()
+);
+
+export const loadIssuesByProjectIdSuccess = createAction(
+  '[Issue API] Load Issues By Project Success',
+  props<{ issues: Issue[] }>()
+);
