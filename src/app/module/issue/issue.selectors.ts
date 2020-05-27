@@ -46,7 +46,7 @@ export const doneIssues = createSelector(
 
 export const isIssuesLoaded = createSelector(
   issueState,
-  issueState => issueState.isAllIssuesLoaded
+  issueState => issueState.isIssuesLoaded
 )
 
 export const isProjectIssuesLoaded = createSelector(

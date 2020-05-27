@@ -28,7 +28,6 @@ import {IssueEffects} from "../issue/issue.effects";
     CommonModule,
     EpicRoutingModule,
     StoreModule.forFeature(fromEpic.epicFeatureKey, fromEpic.reducer),
-    StoreModule.forFeature(fromEpic.projectIssueFeatureKey, fromEpic.projectIssueReducer),
     EffectsModule.forFeature([EpicEffects]),
     NzTableModule,
     NzIconModule,
