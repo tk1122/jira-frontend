@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Epic} from "../../../../../shared/model/epic";
 import {select, Store} from "@ngrx/store";
-import {userId} from "../../../auth/auth.selectors";
-import {loadEpics, selectEpic, selectProject} from "../../epic.actions";
-import {epic, epics} from "../../epic.selectors";
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import {filter, map, switchMap, tap, withLatestFrom} from "rxjs/operators";
+import {loadEpics, selectProject} from "../../epic.actions";
+import {epic} from "../../epic.selectors";
+import {ActivatedRoute} from "@angular/router";
+import {switchMap} from "rxjs/operators";
 import {loadIssuesByProjectId} from "../../../issue/issue.actions";
 import {Issue} from "../../../../../shared/model/issue";
 
@@ -34,8 +33,8 @@ interface ChildrenItemData {
   styleUrls: ['./epic-list.component.scss']
 })
 export class EpicListComponent implements OnInit {
-  epics$: Observable<(Epic | {expand: boolean, key: number, issues: Issue[]})[]> = of([]);
-  epic$: Observable<(Epic | {expand: boolean, key: number, issues: Issue[]})[]> = of([]);
+  epics$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
+  epic$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
   isVisible = false;
   listOfParentData: ParentItemData[] = [];
   listOfChildrenData: ChildrenItemData[] = [];
@@ -75,17 +74,13 @@ export class EpicListComponent implements OnInit {
           params.get('id') || ''
         ))
       ).subscribe(([projectId, _]) => {
-        this.store.dispatch(loadEpics({projectId}))
-        this.store.dispatch(loadIssuesByProjectId({projectId}))
-        this.store.dispatch(selectProject({id: Number(projectId)}))
+      this.store.dispatch(loadEpics({projectId}))
+      this.store.dispatch(loadIssuesByProjectId({projectId}))
+      this.store.dispatch(selectProject({id: Number(projectId)}))
     })
 
     this.epic$ = this.store.pipe(select(epic))
   }
-
-  // handleClick(id:number) {
-  //   this.store.dispatch(selectEpic({id}))
-  // }
 
   showModal(): void {
     this.isVisible = true;

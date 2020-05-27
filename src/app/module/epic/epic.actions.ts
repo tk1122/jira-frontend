@@ -19,11 +19,11 @@ export const loadEpicFailure = createAction(
 )
 
 export const selectEpic = createAction(
-  '[Epic Page] Load epic selected',
+  '[Epic Page] Select epic',
   props<{ id: number }>()
 )
 
 export const selectProject = createAction(
-  '[Epic Page] Load epic selected',
+  '[Epic Page] Select project',
   props<{ id: number }>()
 )
