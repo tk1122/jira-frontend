@@ -14,7 +14,7 @@
     <td>{{data.startDate | date}}</td>
     <td>{{ data.endDate | date}}</td>
     <td>
-      <nz-progress [nzPercent]="30"></nz-progress>
+      <nz-progress [nzPercent]="data.timeLeft"></nz-progress>
     </td>
     <td><a><i nz-icon nzType="eye" nzTheme="outline"></i></a></td>
   </tr>

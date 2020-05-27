@@ -21,6 +21,13 @@ export class EpicEffects {
       switchMap(([action, _]) =>
         this.epicService.getEpicByProjectId(action.projectId.toString()).pipe(
           map(epics => {
+            epics = epics.map(epic => {
+              return {
+                ...epic,
+                timeLeft:  Number((((new Date(epic.endDate).getTime() - new Date().getTime()) /(new Date(epic.endDate).getTime() - new Date(epic.startDate).getTime())) * 100).toFixed(0))
+              }
+            })
+            console.log(epics)
             return loadEpicsSuccess({epics})
           }),
           tap(epics => {
