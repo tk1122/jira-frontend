@@ -21,7 +21,7 @@ import {NzNotificationService} from "ng-zorro-antd";
 
 
 @Injectable()
-export class UserEffects implements OnInitEffects {
+export class UserEffects {
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUsers),
@@ -62,22 +62,18 @@ export class UserEffects implements OnInitEffects {
   updateUserFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateUserFailure),
-      tap(({error: {error}}) => {
-        this.notification.error(error, '')
+      tap(({error: {error, message}}) => {
+        this.notification.error(error, message)
       })
     ), {dispatch: false}
   )
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store, private readonly notification: NzNotificationService) {
   }
-
-  ngrxOnInitEffects(): Action {
-    return loadUsers({});
-  }
 }
 
 @Injectable()
-export class RoleEffects implements OnInitEffects {
+export class RoleEffects {
 
   loadRoles$ = createEffect(() =>
     this.actions$.pipe(
@@ -97,9 +93,5 @@ export class RoleEffects implements OnInitEffects {
 
 
   constructor(private actions$: Actions, private readonly userService: UserService, private readonly store: Store) {
-  }
-
-  ngrxOnInitEffects(): Action {
-    return loadRoles({});
   }
 }
