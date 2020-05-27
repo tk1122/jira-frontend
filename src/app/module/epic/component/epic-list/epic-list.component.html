@@ -13,7 +13,7 @@
   <ng-template ngFor let-data [ngForOf]="nestedTable.data">
     <tr>
       <td [(nzExpand)]="data.expand"></td>
-      <td class="epic-name" (click)="handleClick(data.id)">{{ data.name }}</td>
+      <td class="epic-name">{{ data.name }}</td>
       <td>{{data.startDate | date}}</td>
       <td>{{ data.endDate | date}}</td>
       <td>

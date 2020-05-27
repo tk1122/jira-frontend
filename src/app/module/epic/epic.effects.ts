@@ -9,8 +9,8 @@ import {ErrorMessage} from "../../../shared/model/error-message";
 import {of} from "rxjs";
 import {loadIssuesByProjectId, loadIssuesByProjectIdSuccess} from "../issue/issue.actions";
 import {IssueService} from "../issue/issue.service";
-import {projectSelectedId} from "../project/project.selectors";
 import {selectProject} from "../project/project.actions";
+import {selectedProjectId} from "./epic.selectors";
 
 
 @Injectable()
@@ -19,10 +19,9 @@ export class EpicEffects {
   loadEpics$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadEpics),
+      withLatestFrom(this.store.pipe(select(selectedProjectId))),
       tap(a => console.log(a)),
-      withLatestFrom(this.store.pipe(select(projectSelectedId))),
-      tap(a => console.log(a)),
-      filter(([projectId, projectSelectedId]) => {
+      filter(([{projectId}, projectSelectedId]) => {
         return !projectSelectedId || Number(projectId) !== projectSelectedId
       }),
       switchMap(([action, _]) =>
@@ -45,10 +44,11 @@ export class EpicEffects {
   loadIssuesByProjectId$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadIssuesByProjectId),
-      withLatestFrom(this.store.pipe(select(projectSelectedId))),
-      // filter(([projectId, projectSelectedId]) => {
-      //   return Number(projectId) !== projectSelectedId
-      // }),
+      withLatestFrom(this.store.pipe(select(selectedProjectId))),
+      tap(x => console.log(x)),
+      filter(([{projectId}, projectSelectedId]) => {
+        return !projectSelectedId || Number(projectId) !== projectSelectedId
+      }),
       switchMap((([action, _]) => {
           console.log(action)
           return this.issueService.getIssuesByProjectId(action.projectId).pipe(

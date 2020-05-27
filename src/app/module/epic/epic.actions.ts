@@ -23,12 +23,7 @@ export const selectEpic = createAction(
   props<{ id: number }>()
 )
 
-export const loadIssuesByProjectId = createAction(
-  '[Issue Page] Load Issues By Project',
-  props<{projectId:string}>()
-);
-
-export const loadIssuesByProjectIdSuccess = createAction(
-  '[Issue API] Load Issues By Project Success',
-  props<{ issues: Issue[] }>()
-);
+export const selectProject = createAction(
+  '[Epic Page] Load epic selected',
+  props<{ id: number }>()
+)
