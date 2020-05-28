@@ -14,7 +14,10 @@ export interface ProjectState extends EntityState<Project> {
 
 export const projectEntityAdapter = createEntityAdapter<Project>();
 
-const initialState: ProjectState = projectEntityAdapter.getInitialState({isProjectsLoaded: false, selectedProjectId: undefined})
+const initialState: ProjectState = projectEntityAdapter.getInitialState({
+  isProjectsLoaded: false,
+  selectedProjectId: undefined
+})
 
 export const reducer = createReducer(
   initialState,
@@ -23,7 +26,11 @@ export const reducer = createReducer(
     isProjectsLoaded: true
   })),
   on(selectProject, (state, {id}) => ({...state, selectedProjectId: id})),
-  on(logout, state => projectEntityAdapter.removeAll({...state, isProjectsLoaded: false})),
+  on(logout, state => projectEntityAdapter.removeAll({
+    ...state,
+    isProjectsLoaded: false,
+    selectedProjectId: undefined
+  })),
   on(createProject, (state, {project}) => projectEntityAdapter.addOne(project, state)),
   on(updateProject, (state, {project}) => projectEntityAdapter.updateOne(project, state)),
   )

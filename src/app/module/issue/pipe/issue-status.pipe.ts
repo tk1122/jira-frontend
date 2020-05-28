@@ -3,7 +3,7 @@ import {IssueStatus} from "../../../../shared/model/issue";
 
 @Pipe({name: 'issueStatus'})
 export class IssueStatusPipe implements PipeTransform {
-  transform(status: number): string {
+  transform(status: IssueStatus): string {
     switch (status) {
       case IssueStatus.Todo:
         return 'Todo'
