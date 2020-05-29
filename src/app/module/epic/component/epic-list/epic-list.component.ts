@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Epic} from "../../../../../shared/model/epic";
 import {select, Store} from "@ngrx/store";
-import {loadEpics, selectProject} from "../../epic.actions";
-import {epic} from "../../epic.selectors";
+import {createEpic, loadEpics, selectProject} from "../../epic.actions";
+import {epic, selectedProjectId} from "../../epic.selectors";
 import {ActivatedRoute} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {loadIssuesByProjectId} from "../../../issue/issue.actions";
@@ -47,27 +47,25 @@ export class EpicListComponent implements OnInit {
   ) {
   }
 
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
-  }
-
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return {required: true};
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return {confirm: true, error: true};
-    }
-    return {};
-  };
-
   submitForm(): void {
     for (const i in this.validateForm.controls) {
+      //@ts-ignore
+      let result: Epic ={}
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
-      console.log(this.validateForm.value)
-      console.log(this.validateForm.value.rangePicker[0].toISOString())
-      // this.store.dispatch(signup(this.validateForm.value))
+      // console.log(this.validateForm.value)
+      // console.log(this.validateForm.value.rangePicker[0].toISOString())
+      result.name = this.validateForm.value.name
+      result.description = this.validateForm.value.description
+      result.startDate = this.validateForm.value.rangePicker[0].toISOString()
+      result.endDate = this.validateForm.value.rangePicker[1].toISOString()
+      this.store.pipe(select(selectedProjectId)).subscribe(id => {
+        if (id != null) {
+          result.projectId = id
+        }
+      })
+      console.log(result)
+      // this.store.dispatch(createEpic(this.validateForm.value))
     }
   }
   ngOnInit(): void {

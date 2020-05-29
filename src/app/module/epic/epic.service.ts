@@ -20,6 +20,7 @@ export class EpicService {
   }
 
   createEpic(epic: Epic) {
-    return this.httpClient.post<Epic[]>(`${environment.url}/epics`, {epic})
+    console.log(epic)
+    return this.httpClient.post<Epic>(`${environment.url}/epics`, {epic})
   }
 }

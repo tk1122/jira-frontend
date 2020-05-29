@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {createEpic, loadEpicFailure, loadEpics, loadEpicsSuccess} from "./epic.actions";
+import {createEpic, createEpicSuccess, loadEpicFailure, loadEpics, loadEpicsSuccess} from "./epic.actions";
 import {catchError, filter, map, mergeMap, switchMap, tap, withLatestFrom} from "rxjs/operators";
 import {EpicService} from "./epic.service";
 import {UserService} from "../user/user.service";
@@ -58,16 +58,18 @@ export class EpicEffects {
       ))
   })
 
-  // createEpic$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(createEpic),
-  //     withLatestFrom(this.store.pipe(select(selectedProjectId))),
-  //     tap(x => console.log(x)),
-  //     filter(([{projectId}, projectSelectedId]) => {
-  //       return !projectSelectedId || Number(projectId) !== projectSelectedId
-  //     }),
-  //   )
-  // })
+  createEpic$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createEpic),
+      switchMap(((action) => {
+          console.log(action)
+          return this.epicService.createEpic(action.epic).pipe(
+            map(epic => createEpicSuccess({epic}))
+          )
+        })
+      )
+    )
+  })
 
   constructor(private actions$: Actions, private readonly epicService: EpicService, private readonly userService: UserService, private readonly issueService: IssueService, private readonly store: Store) {
   }

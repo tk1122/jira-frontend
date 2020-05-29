@@ -29,6 +29,11 @@ export const selectProject = createAction(
 )
 
 export const createEpic = createAction(
-  '[Epic Page] Create project',
+  '[Epic Page] Create epic',
+  props<{ epic: Epic }>()
+)
+
+export const createEpicSuccess = createAction(
+  '[Epic Page] Create epic success',
   props<{ epic: Epic }>()
 )
