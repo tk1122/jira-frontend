@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {ProjectComponent} from './component/project/project.component';
 import {ProjectListComponent} from "./component/project-list/project-list.component";
+import {UserContentModulesGaurd} from "../auth/auth.gaurd";
 
 const routes: Routes = [{
   path: '', component: ProjectComponent, children: [
@@ -12,7 +13,8 @@ const routes: Routes = [{
     },
     {
       path: ':id',
-      loadChildren: () => import('../../module/epic/epic.module').then(m => m.EpicModule)
+      loadChildren: () => import('../../module/epic/epic.module').then(m => m.EpicModule),
+      canLoad: [UserContentModulesGaurd]
     }
   ]
 }];

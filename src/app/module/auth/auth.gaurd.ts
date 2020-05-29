@@ -9,7 +9,7 @@ import {AuthModule} from "./auth.module";
 @Injectable({
   providedIn: AuthModule
 })
-export class IssueModuleGaurd implements CanLoad {
+export class UserContentModulesGaurd implements CanLoad {
   constructor(private readonly store: Store) {
   }
 
