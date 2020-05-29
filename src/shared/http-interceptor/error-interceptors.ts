@@ -13,7 +13,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }),
         catchError((res: HttpErrorResponse) => {
           const errorMessage: ErrorMessage = {
-            message: res.error.message,
+            message: typeof res.error.message === 'string' ? res.error.message : '',
             statusCode: res.error.statusCode,
             error: res.error.error || 'Network Error',
           }

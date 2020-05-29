@@ -2,12 +2,30 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Epic} from "../../../../../shared/model/epic";
 import {select, Store} from "@ngrx/store";
-import {userId} from "../../../auth/auth.selectors";
-import {loadEpics, selectEpic} from "../../epic.actions";
-import {epics} from "../../epic.selectors";
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import {filter, map, switchMap, tap, withLatestFrom} from "rxjs/operators";
-import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/tasks/completion";
+import {loadEpics, selectProject} from "../../epic.actions";
+import {epic} from "../../epic.selectors";
+import {ActivatedRoute} from "@angular/router";
+import {switchMap} from "rxjs/operators";
+import {loadIssuesByProjectId} from "../../../issue/issue.actions";
+import {Issue} from "../../../../../shared/model/issue";
+
+interface ParentItemData {
+  key: number;
+  name: string;
+  platform: string;
+  version: string;
+  upgradeNum: number | string;
+  creator: string;
+  createdAt: string;
+  expand: boolean;
+}
+
+interface ChildrenItemData {
+  key: number;
+  name: string;
+  date: string;
+  upgradeNum: string;
+}
 
 @Component({
   selector: 'app-epic-list',
@@ -15,8 +33,11 @@ import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/ta
   styleUrls: ['./epic-list.component.scss']
 })
 export class EpicListComponent implements OnInit {
-  epic$: Observable<Epic[]> = of([]);
+  epics$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
+  epic$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
   isVisible = false;
+  listOfParentData: ParentItemData[] = [];
+  listOfChildrenData: ChildrenItemData[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,25 +46,40 @@ export class EpicListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    for (let i = 0; i < 3; ++i) {
+      this.listOfParentData.push({
+        key: i,
+        name: 'Screem',
+        platform: 'iOS',
+        version: '10.3.4.5654',
+        upgradeNum: 500,
+        creator: 'Jack',
+        createdAt: '2014-12-24 23:12:00',
+        expand: false
+      });
+    }
+    for (let i = 0; i < 3; ++i) {
+      this.listOfChildrenData.push({
+        key: i,
+        date: '2014-12-24 23:12:00',
+        name: 'This is production name',
+        upgradeNum: `${i}`
+      });
+    }
+
     this.route
       .paramMap
       .pipe(
         switchMap(params => (
           params.get('id') || ''
-        )),
-        withLatestFrom(this.store.pipe(
-          select(userId)
-        )),
-        filter(([projectId, userId]) => userId !== undefined)
-      ).subscribe(([projectId, userId]) => {
-      return this.store.dispatch(loadEpics({projectId}))
+        ))
+      ).subscribe(([projectId, _]) => {
+      this.store.dispatch(loadEpics({projectId}))
+      this.store.dispatch(loadIssuesByProjectId({projectId}))
+      this.store.dispatch(selectProject({id: Number(projectId)}))
     })
 
-    this.epic$ = this.store.pipe(select(epics))
-  }
-
-  handleClick(id:number) {
-    this.store.dispatch(selectEpic({id}))
+    this.epic$ = this.store.pipe(select(epic))
   }
 
   showModal(): void {

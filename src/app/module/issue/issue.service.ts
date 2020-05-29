@@ -15,4 +15,9 @@ export class IssueService {
   getIssuesByAssigneeId() {
     return this.httpClient.get<Issue[]>(`${environment.url}/issues`)
   }
+
+  getIssuesByProjectId(projectId: string) {
+    console.log(projectId)
+    return this.httpClient.get<Issue[]>(`${environment.url}/issues?projectId=${projectId}`)
+  }
 }

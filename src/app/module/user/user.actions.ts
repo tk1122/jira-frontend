@@ -6,7 +6,6 @@ import {Update} from "@ngrx/entity";
 
 export const loadUsers = createAction(
   '[User Page] Load users',
-  props<{}>()
 )
 
 export const loadUsersSuccess = createAction(
@@ -21,7 +20,6 @@ export const loadUserFailure = createAction(
 
 export const loadRoles = createAction(
   '[User Page] Load roles',
-  props<{}>()
 )
 
 export const loadRolesSuccess = createAction(
@@ -46,7 +44,6 @@ export const updateUser = createAction(
 
 export const updateUserSuccess = createAction(
   '[User API] Update user success',
-  props<{}>()
 )
 
 export const updateUserFailure = createAction(

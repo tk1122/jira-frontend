@@ -18,6 +18,7 @@ import {
 } from "ng-zorro-antd";
 import {SharedComponentModule} from "../shared-component/shared-component.module";
 import { EpicSidebarComponent } from './component/epic-sidebar/epic-sidebar.component';
+import {IssueEffects} from "../issue/issue.effects";
 
 
 

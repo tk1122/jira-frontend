@@ -3,6 +3,7 @@ import {select, Store} from "@ngrx/store";
 import {Observable, of} from "rxjs";
 import {Issue} from "../../../../../shared/model/issue";
 import {doingIssues, doneIssues, issues, testingIssues, todoIssues} from "../../issue.selectors";
+import {loadIssues} from "../../issue.actions";
 
 
 @Component({
@@ -21,6 +22,8 @@ export class IssueComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(loadIssues())
+
     this.allIssues$ = this.store.pipe(
       select(issues)
     )
