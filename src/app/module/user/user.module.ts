@@ -35,8 +35,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     NzTableModule,
     NzIconModule,
     SharedComponentModule,
-    NzGridModule, // must
-    NzFormModule, // must
+    NzGridModule,
+    NzFormModule,
     NzSelectModule,
     ReactiveFormsModule,
     NzInputModule,
