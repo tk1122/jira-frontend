@@ -18,4 +18,9 @@ export class EpicService {
 
     return this.httpClient.get<Epic[]>(`${environment.url}/epics?projectId=${projectId}`)
   }
+
+  createEpic(epic: Epic) {
+    console.log(epic)
+    return this.httpClient.post<Epic>(`${environment.url}/epics`, {epic})
+  }
 }
