@@ -1,27 +1,26 @@
 <div nz-row>
-  <div nz-col nzSpan="16">
-    <nz-table #basicTable [nzData]="users$ | async">
-      <thead>
-      <tr>
-        <th>Username</th>
-        <th>Fullname</th>
-        <th>Status</th>
-        <th *ngIf="isAdmin$ | async">View</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td class="issue-name">{{ data.username }}</td>
-        <td>{{ data.fullname }}</td>
-        <td>{{ data.status | userStatus}}</td>
-        <td ><a [routerLink]="[data.id]"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
-        </td>
-      </tr>
-      </tbody>
-    </nz-table>
-  </div>
-  <div nz-col nzSpan="8">
-    <router-outlet></router-outlet>
-  </div>
+    <div nz-col nzSpan="16">
+        <nz-table #basicTable [nzData]="users$ | async" id="user-table">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Fullname</th>
+                    <th>Status</th>
+                    <th *ngIf="isAdmin$ | async">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                    <td class="issue-name">{{ data.username }}</td>
+                    <td>{{ data.fullname }}</td>
+                    <td>{{ data.status | userStatus}}</td>
+                    <td><a [routerLink]="[data.id]"><i nz-icon nzType="edit" nzTheme="outline"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div nz-col nzSpan="8">
+        <router-outlet></router-outlet>
+    </div>
 </div>
-
