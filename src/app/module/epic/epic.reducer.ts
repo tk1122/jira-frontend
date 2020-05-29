@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {Epic} from "../../../shared/model/epic";
-import {loadEpicsSuccess, selectEpic, selectProject} from './epic.actions'
+import {createEpic, loadEpicsSuccess, selectEpic, selectProject} from './epic.actions'
 import {logout} from "../auth/auth.actions";
 
 
@@ -35,7 +35,7 @@ export const reducer = createReducer(
     selectedEpicId: undefined,
     selectedProjectId: undefined
   })),
-  // on(createEpic, (state, {Epic}) => EpicEntityAdapter.addOne(Epic, state)),
+  on(createEpic, (state, {epic}) => epicEntityAdapter.addOne(epic, state)),
   // on(updateEpic, (state, {Epic}) => EpicEntityAdapter.updateOne(Epic, state)),
 )
 

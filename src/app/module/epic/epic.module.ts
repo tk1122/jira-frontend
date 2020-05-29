@@ -8,8 +8,8 @@ import * as fromEpic from './epic.reducer';
 import {EpicRoutingModule} from "./epic-routing.module";
 import {EpicEffects} from "./epic.effects";
 import {
-  NzButtonModule,
-  NzIconModule,
+  NzButtonModule, NzDatePickerModule, NzFormModule, NzGridModule,
+  NzIconModule, NzInputModule,
   NzLayoutModule,
   NzMenuModule,
   NzModalModule,
@@ -19,6 +19,7 @@ import {
 import {SharedComponentModule} from "../shared-component/shared-component.module";
 import { EpicSidebarComponent } from './component/epic-sidebar/epic-sidebar.component';
 import {IssueEffects} from "../issue/issue.effects";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -37,6 +38,11 @@ import {IssueEffects} from "../issue/issue.effects";
     NzProgressModule,
     NzModalModule,
     NzButtonModule,
+    NzGridModule,
+    NzInputModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzDatePickerModule,
   ]
 })
 export class EpicModule { }
