@@ -2,12 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {Epic} from "../../../../../shared/model/epic";
 import {select, Store} from "@ngrx/store";
-import {loadEpics, selectProject} from "../../epic.actions";
-import {epic} from "../../epic.selectors";
+import {createEpic, loadEpics, selectProject} from "../../epic.actions";
+import {epic, selectedProjectId} from "../../epic.selectors";
 import {ActivatedRoute} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {loadIssuesByProjectId} from "../../../issue/issue.actions";
 import {Issue} from "../../../../../shared/model/issue";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {signup} from "../../../auth/auth.actions";
 
 interface ParentItemData {
   key: number;
@@ -36,37 +38,37 @@ export class EpicListComponent implements OnInit {
   epics$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
   epic$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
   isVisible = false;
-  listOfParentData: ParentItemData[] = [];
-  listOfChildrenData: ChildrenItemData[] = [];
+  validateForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
-    private readonly store: Store
+    private readonly store: Store,
+    private fb: FormBuilder
   ) {
   }
 
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      //@ts-ignore
+      let result: Epic ={}
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+      // console.log(this.validateForm.value)
+      // console.log(this.validateForm.value.rangePicker[0].toISOString())
+      result.name = this.validateForm.value.name
+      result.description = this.validateForm.value.description
+      result.startDate = this.validateForm.value.rangePicker[0].toISOString()
+      result.endDate = this.validateForm.value.rangePicker[1].toISOString()
+      this.store.pipe(select(selectedProjectId)).subscribe(id => {
+        if (id != null) {
+          result.projectId = id
+        }
+      })
+      console.log(result)
+      // this.store.dispatch(createEpic(this.validateForm.value))
+    }
+  }
   ngOnInit(): void {
-    for (let i = 0; i < 3; ++i) {
-      this.listOfParentData.push({
-        key: i,
-        name: 'Screem',
-        platform: 'iOS',
-        version: '10.3.4.5654',
-        upgradeNum: 500,
-        creator: 'Jack',
-        createdAt: '2014-12-24 23:12:00',
-        expand: false
-      });
-    }
-    for (let i = 0; i < 3; ++i) {
-      this.listOfChildrenData.push({
-        key: i,
-        date: '2014-12-24 23:12:00',
-        name: 'This is production name',
-        upgradeNum: `${i}`
-      });
-    }
-
     this.route
       .paramMap
       .pipe(
@@ -79,6 +81,11 @@ export class EpicListComponent implements OnInit {
       this.store.dispatch(selectProject({id: Number(projectId)}))
     })
 
+    this.validateForm = this.fb.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      rangePicker: [[]],
+    });
     this.epic$ = this.store.pipe(select(epic))
   }
 
