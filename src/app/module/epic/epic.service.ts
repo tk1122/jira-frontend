@@ -21,6 +21,13 @@ export class EpicService {
 
   createEpic(epic: Epic) {
     console.log(epic)
-    return this.httpClient.post<Epic>(`${environment.url}/epics`, {epic})
+    const { name, description, startDate, endDate, projectId} = epic
+    return this.httpClient.post<Epic>(`${environment.url}/epics`, {
+      name,
+      description,
+      startDate,
+      endDate,
+      projectId
+    })
   }
 }

@@ -5,6 +5,7 @@ import { EpicListComponent } from './component/epic-list/epic-list.component';
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import * as fromEpic from './epic.reducer';
+import * as fromRoles from '../user/user.reducer';
 import {EpicRoutingModule} from "./epic-routing.module";
 import {EpicEffects} from "./epic.effects";
 import {
@@ -17,19 +18,24 @@ import {
   NzTableModule
 } from "ng-zorro-antd";
 import {SharedComponentModule} from "../shared-component/shared-component.module";
-import { EpicSidebarComponent } from './component/epic-sidebar/epic-sidebar.component';
+import { SidebarComponent } from '../shared-component/component/sidebar/sidebar.component';
 import {IssueEffects} from "../issue/issue.effects";
 import {ReactiveFormsModule} from "@angular/forms";
+import {RoleEffects} from "../user/user.effects";
 
 
 
 @NgModule({
-  declarations: [EpicComponent, EpicListComponent, EpicSidebarComponent],
+  declarations: [EpicComponent, EpicListComponent, SidebarComponent],
+  exports: [
+    SidebarComponent
+  ],
   imports: [
     CommonModule,
     EpicRoutingModule,
     StoreModule.forFeature(fromEpic.epicFeatureKey, fromEpic.reducer),
-    EffectsModule.forFeature([EpicEffects]),
+    StoreModule.forFeature(fromRoles.roleFeatureKey, fromRoles.roleReducer),
+    EffectsModule.forFeature([EpicEffects, RoleEffects]),
     NzTableModule,
     NzIconModule,
     SharedComponentModule,

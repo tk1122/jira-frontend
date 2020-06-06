@@ -3,13 +3,15 @@ import {Observable, of} from "rxjs";
 import {Epic} from "../../../../../shared/model/epic";
 import {select, Store} from "@ngrx/store";
 import {createEpic, loadEpics, selectProject} from "../../epic.actions";
-import {epic, selectedProjectId} from "../../epic.selectors";
+import {epic, isPmOfSelectedProject, selectedProjectId} from "../../epic.selectors";
 import {ActivatedRoute} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {loadIssuesByProjectId} from "../../../issue/issue.actions";
 import {Issue} from "../../../../../shared/model/issue";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {signup} from "../../../auth/auth.actions";
+import {loadRoles} from "../../../user/user.actions";
+import {Project} from "../../../../../shared/model/project";
 
 interface ParentItemData {
   key: number;
@@ -35,10 +37,10 @@ interface ChildrenItemData {
   styleUrls: ['./epic-list.component.scss']
 })
 export class EpicListComponent implements OnInit {
-  epics$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
   epic$: Observable<(Epic | { expand: boolean, key: number, issues: Issue[] })[]> = of([]);
   isVisible = false;
   validateForm!: FormGroup;
+  isPm$: Observable<boolean> = of();
 
   constructor(
     private route: ActivatedRoute,
@@ -53,8 +55,6 @@ export class EpicListComponent implements OnInit {
       let result: Epic ={}
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
-      // console.log(this.validateForm.value)
-      // console.log(this.validateForm.value.rangePicker[0].toISOString())
       result.name = this.validateForm.value.name
       result.description = this.validateForm.value.description
       result.startDate = this.validateForm.value.rangePicker[0].toISOString()
@@ -65,9 +65,10 @@ export class EpicListComponent implements OnInit {
         }
       })
       console.log(result)
-      // this.store.dispatch(createEpic(this.validateForm.value))
+      this.store.dispatch(createEpic({epic: result}))
     }
   }
+
   ngOnInit(): void {
     this.route
       .paramMap
@@ -81,12 +82,16 @@ export class EpicListComponent implements OnInit {
       this.store.dispatch(selectProject({id: Number(projectId)}))
     })
 
+    this.store.dispatch(loadRoles())
+
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
       description: [null, [Validators.required]],
       rangePicker: [[]],
     });
     this.epic$ = this.store.pipe(select(epic))
+
+    this.isPm$ = this.store.pipe(select(isPmOfSelectedProject))
   }
 
   showModal(): void {

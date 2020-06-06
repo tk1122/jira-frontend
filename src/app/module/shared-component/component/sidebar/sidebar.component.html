@@ -1,14 +1,10 @@
-
+{{(selectedProject$ | async)?.name}}
 <ul nz-menu nzMode="inline" class="sider-menu">
-  <li nz-menu-item nzSelected>
-    <i nz-icon nzType="mail"></i>
-    {{(projectSelected$ | async)?.name}}
-  </li>
-  <li nz-menu-item nzSelected>
+  <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/epics">
     <i nz-icon nzType="mail"></i>
     Roadmap
   </li>
-  <li nz-menu-item>
+  <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/sprints">
     <i nz-icon nzType="appstore"></i>
     Backlog
   </li>
