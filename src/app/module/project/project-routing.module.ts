@@ -12,8 +12,13 @@ const routes: Routes = [{
       component: ProjectListComponent
     },
     {
-      path: ':id',
+      path: ':id/epics',
       loadChildren: () => import('../../module/epic/epic.module').then(m => m.EpicModule),
+      canLoad: [UserContentModulesGaurd]
+    },
+    {
+      path: ':id/sprints',
+      loadChildren: () => import('../../module/sprint/sprint.module').then(m => m.SprintModule),
       canLoad: [UserContentModulesGaurd]
     }
   ]

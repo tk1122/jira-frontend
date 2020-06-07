@@ -40,7 +40,7 @@
 <tr>
 </tr>
 </ng-template>
-<td>
+<td *ngIf="isPm$ | async">
   <button nz-button nzType="default" (click)="showModal()"><i nz-icon nzType="plus-circle"></i>Create Epic</button>
 </td>
 </tbody>

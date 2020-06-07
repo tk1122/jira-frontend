@@ -1,7 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {Epic} from "../../../shared/model/epic";
 import {ErrorMessage} from "../../../shared/model/error-message";
-import {Issue} from "../../../shared/model/issue";
 
 export const loadEpics = createAction(
   '[Epic Page] Load Epics',

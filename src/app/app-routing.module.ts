@@ -17,11 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./module/issue/issue.module').then(m => m.IssueModule),
     canLoad: [UserContentModulesGaurd]
   },
-  {
-    path: 'sprints',
-    loadChildren: () => import('./module/sprint/sprint.module').then(m => m.SprintModule),
-    canLoad: [UserContentModulesGaurd]
-  },
+  // {
+  //   path: 'sprints',
+  //   loadChildren: () => import('./module/sprint/sprint.module').then(m => m.SprintModule),
+  //   canLoad: [UserContentModulesGaurd]
+  // },
   {path: 'unauthorized-access', component: UnauthorizedAccessComponent},
   {path: 'users', loadChildren: () => import('./module/user/user.module').then(m => m.UserModule)},
   {

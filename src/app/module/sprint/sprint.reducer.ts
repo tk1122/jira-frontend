@@ -1,20 +1,33 @@
-import {createReducer} from '@ngrx/store';
+import {createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {Sprint} from "../../../shared/model/sprint";
+import {addIssueToSprintSuccess, loadSprintsSuccess} from "./sprint.actions";
+import {issueEntityAdapter} from "../issue/issue.reducer";
+import {selectProject} from "../epic/epic.actions";
 
 
 export const sprintFeatureKey = 'sprint';
 
 export interface SprintState extends EntityState<Sprint> {
-  isSprintsLoaded: boolean
+  isSprintsLoaded: boolean,
+  selectedProjectId?: number
 }
 
 export const sprintEntityAdapter = createEntityAdapter<Sprint>();
 
-const initialState: SprintState = sprintEntityAdapter.getInitialState({isSprintsLoaded: false})
+const initialState: SprintState = sprintEntityAdapter.getInitialState({
+  isSprintsLoaded: false,
+  selectedProjectId: undefined
+})
 
 export const reducer = createReducer(
-  initialState
+  initialState,
+  on(loadSprintsSuccess, (state, {sprints}) => sprintEntityAdapter.setAll(sprints, {
+    ...state,
+    isSprintsLoaded: true
+  })),
+  on(selectProject, (state, {id}) => ({...state, selectedProjectId: id})),
+
   )
 ;
 
