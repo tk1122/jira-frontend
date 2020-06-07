@@ -27,6 +27,6 @@ export class ProjectListComponent implements OnInit {
   }
 
   handleClick(id: number) {
-    this.router.navigate(['/projects', id]).then()
+    this.router.navigate(['/projects', id, 'epics']).then()
   }
 }

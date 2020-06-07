@@ -1,1 +1,10 @@
-<p>sprint works!</p>
+<nz-layout>
+  <nz-sider nzWidth="200px" nzTheme="light">
+    <app-sidebar></app-sidebar>
+  </nz-sider>
+  <nz-layout class="inner-layout">
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

@@ -20,4 +20,10 @@ export class IssueService {
     console.log(projectId)
     return this.httpClient.get<Issue[]>(`${environment.url}/issues?projectId=${projectId}`)
   }
+
+  updateIssue(issueId: string | number, sprintId?: number | null) {
+    console.log(issueId)
+    console.log(sprintId)
+    return this.httpClient.put<Issue>(`${environment.url}/issues/${Number(issueId)}`, {sprintId})
+  }
 }
