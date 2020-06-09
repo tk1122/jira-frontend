@@ -1,7 +1,8 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {sprintEntityAdapter, sprintFeatureKey, SprintState} from "./sprint.reducer";
 import {projectIssue} from "../issue/issue.selectors";
-import {Issue} from "../../../shared/model/issue";
+import {Issue, IssueStatus} from "../../../shared/model/issue";
+import {SprintStatus} from "../../../shared/model/sprint";
 
 const selectSprintState = createFeatureSelector<SprintState>(sprintFeatureKey);
 
@@ -30,4 +31,18 @@ export const sprint = createSelector(sprints, projectIssue, (sprints, issues) =>
 
 export const backlogs = createSelector(projectIssue, (issues) => {
   return issues.filter(issue => issue.sprintId !== null)
+})
+
+export const sprintBoards = createSelector(sprints, projectIssue, (sprints, issues) => {
+  const result = sprints.filter(sprint => sprint.status === SprintStatus.InProgress).map(sprint => {
+    return {
+      ...sprint,
+      todoIssues: issues.filter(issue => (issue.sprintId === sprint.id && issue.status === 0)).concat({"status": IssueStatus.Todo} as unknown as Issue),
+      doingIssues: issues.filter(issue => (issue.sprintId === sprint.id && issue.status === 1)).concat({"status": IssueStatus.Doing} as unknown as Issue),
+      testingIssues: issues.filter(issue => (issue.sprintId === sprint.id && issue.status === 2)).concat({"status": IssueStatus.Testing} as unknown as Issue),
+      doneIssues: issues.filter(issue => (issue.sprintId === sprint.id && issue.status === 3)).concat({"status": IssueStatus.Done} as unknown as Issue)
+    }
+  })
+  console.log(result)
+  return result
 })

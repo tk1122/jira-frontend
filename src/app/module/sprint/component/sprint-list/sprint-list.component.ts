@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from "@ngrx/store";
-import {addIssueToSprint, loadSprints, selectProject} from "../../sprint.actions";
+import {addIssueToSprint, loadSprints, selectProject, updateActiveSprint} from "../../sprint.actions";
 import {delay, switchMap} from "rxjs/operators";
 import {loadIssuesByProjectId} from "../../../issue/issue.actions";
 import {ActivatedRoute} from "@angular/router";
@@ -75,6 +75,20 @@ export class SprintListComponent implements OnInit {
       console.log(issue)
       this.store.dispatch(addIssueToSprint({issue}))
     }
+  }
+
+  onActiveChange(event: boolean, sprintId: number) {
+    console.log(event)
+    console.log(sprintId)
+    const sprint: Update<Sprint> = {
+      id: sprintId,
+      changes: {
+        id: sprintId,
+        active: event
+      }
+    }
+    console.log(sprint)
+    this.store.dispatch(updateActiveSprint({sprint}))
   }
 
 }

@@ -12,9 +12,10 @@ import {EpicModule} from "../epic/epic.module";
 import { SprintListComponent } from './component/sprint-list/sprint-list.component';
 import {IssueEffects} from "../issue/issue.effects";
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SprintBoardComponent } from './component/sprint-board/sprint-board.component';
 
 @NgModule({
-  declarations: [SprintComponent, SprintListComponent],
+  declarations: [SprintComponent, SprintListComponent, SprintBoardComponent],
   imports: [
     CommonModule,
     SprintRoutingModule,
