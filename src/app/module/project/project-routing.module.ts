@@ -20,6 +20,11 @@ const routes: Routes = [{
       path: ':id/sprints',
       loadChildren: () => import('../../module/sprint/sprint.module').then(m => m.SprintModule),
       canLoad: [UserContentModulesGaurd]
+    },
+    {
+      path: ':id/sprints/board',
+      loadChildren: () => import('../../module/sprint/sprint.module').then(m => m.SprintModule),
+      canLoad: [UserContentModulesGaurd]
     }
   ]
 }];

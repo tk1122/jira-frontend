@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {createEntityAdapter, EntityState} from "@ngrx/entity";
 import {Sprint} from "../../../shared/model/sprint";
-import {addIssueToSprintSuccess, loadSprintsSuccess} from "./sprint.actions";
+import {addIssueToSprintSuccess, loadSprintsSuccess, updateActiveSprint} from "./sprint.actions";
 import {issueEntityAdapter} from "../issue/issue.reducer";
 import {selectProject} from "../epic/epic.actions";
 
@@ -27,7 +27,7 @@ export const reducer = createReducer(
     isSprintsLoaded: true
   })),
   on(selectProject, (state, {id}) => ({...state, selectedProjectId: id})),
-
+  on(updateActiveSprint, (state, {sprint}) => sprintEntityAdapter.updateOne(sprint, state))
   )
 ;
 

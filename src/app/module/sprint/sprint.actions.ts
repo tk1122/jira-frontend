@@ -30,11 +30,31 @@ export const addIssueToSprintSuccess = createAction(
 
 export const  addIssueToSprintFailure = createAction(
   '[Sprint API] Add issue to sprint failure',
-  props<{ message: ErrorMessage }>()
+  props<{ error: ErrorMessage }>()
 )
 
 export const selectProject = createAction(
   '[Sprint Page] Select project',
   props<{ id: number }>()
 )
+
+export const changeIssueStatus = createAction(
+  '[Sprint API] Change Issue status',
+  props<{ issue: Update<Issue>}>()
+)
+
+export const changeIssueStatusSuccess = createAction(
+  '[Sprint API] Change Issue status success',
+)
+
+export const  changeIssueStatusFailure = createAction(
+  '[Sprint API]Change Issue status failure',
+  props<{ error: ErrorMessage }>()
+)
+
+export const updateActiveSprint = createAction(
+  '[Sprint API] Update active sprint',
+  props<{sprint: Update<Sprint>}>()
+)
+
 

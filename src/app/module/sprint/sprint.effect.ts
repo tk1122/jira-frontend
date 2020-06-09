@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {
   addIssueToSprint, addIssueToSprintFailure,
-  addIssueToSprintSuccess,
+  addIssueToSprintSuccess, changeIssueStatus, changeIssueStatusFailure, changeIssueStatusSuccess,
   loadSprintFailure,
   loadSprints,
   loadSprintsSuccess
@@ -35,6 +35,12 @@ export class SprintEffects {
       switchMap(([action, _]) =>
         this.sprintService.getSprintByProjectId(action.projectId.toString()).pipe(
           mergeMap(sprints => {
+            sprints = sprints.map(sprint => {
+              return {
+                ...sprint,
+                  active: false
+              }
+            })
             return [loadSprintsSuccess({sprints}), selectProject({id: Number(action.projectId)})]
           }),
           catchError((err: ErrorMessage) => {
@@ -52,10 +58,24 @@ export class SprintEffects {
         this.issueService.updateIssue(id, sprintId).pipe(
           map(issue => addIssueToSprintSuccess()),
           catchError((err: ErrorMessage) => {
-            return of(updateUserFailure({error: err}))
+            return of(addIssueToSprintFailure({error: err}))
           })
         )
        )
+    )
+  )
+
+  updateIssueStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(changeIssueStatus),
+      switchMap(({issue: {id, changes: {status}}}) =>
+        this.issueService.updateIssueStatus(id, status).pipe(
+          map(issue => changeIssueStatusSuccess()),
+          catchError((err: ErrorMessage) => {
+            return of(changeIssueStatusFailure({error: err}))
+          })
+        )
+      )
     )
   )
 

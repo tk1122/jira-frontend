@@ -14,5 +14,6 @@ export interface Sprint extends BaseContentModel{
   totalStoryPoint: number
   status: SprintStatus
   entityType: SprintEntityType
-  projectId: number
+  projectId: number,
+  active: boolean
 }

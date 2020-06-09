@@ -8,7 +8,7 @@
     <i nz-icon nzType="appstore"></i>
     Backlog
   </li>
-  <li nz-menu-item>
+  <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/sprints/board">
     <i nz-icon nzType="appstore"></i>
     Board
   </li>
