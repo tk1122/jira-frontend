@@ -18,7 +18,10 @@
       </li>
     </ul>
   </div>
-  <div nz-col nzSpan="4" nzOffset="4" class="username">
+  <div nz-col nzSpan="4">
+    <app-notification-list></app-notification-list>
+  </div>
+  <div nz-col nzSpan="4"class="username">
     <i class="user-icon" nz-icon [nzType]="'user'"></i>
     <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
       <span class="name">{{username$ | async}}</span>

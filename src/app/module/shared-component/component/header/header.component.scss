@@ -3,6 +3,9 @@
   background-color: #0547a6;
   display: flex;
   align-items: center;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
 }
 
 .icon-header {

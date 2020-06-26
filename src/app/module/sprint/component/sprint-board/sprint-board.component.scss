@@ -1,16 +1,24 @@
 .example-container {
+
   width: 181px;
   margin: 10px;
   display: inline-block;
   vertical-align: top;
 }
 
+.ant-layout-sider {
+  min-height: calc(100vh - 50px);
+  position: sticky;
+  top: 50px;
+}
+
+
 .header-title {
   background-color: #F4F5F7;
   position: sticky;
   border-radius: 8px;
   padding: 0px 10px;
-  top: 5px;
+  top: 50px;
 }
 
 .example-list {

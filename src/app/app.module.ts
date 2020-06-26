@@ -12,11 +12,14 @@ import en from '@angular/common/locales/en';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {EffectsModule} from '@ngrx/effects';
 import {metaReducers} from './app.reducer';
 import {AuthModule} from "./module/auth/auth.module";
 import {httpInterceptorProviders} from "../shared/http-interceptor";
 import {SharedComponentModule} from './module/shared-component/shared-component.module';
+import {NotificationModule} from "./module/notification/notification.module";
 
 registerLocaleData(en);
 
@@ -42,7 +45,10 @@ registerLocaleData(en);
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     SharedComponentModule,
     AuthModule,
+    NotificationModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
   providers: [{provide: NZ_I18N, useValue: en_US}, httpInterceptorProviders],
   bootstrap: [AppComponent]

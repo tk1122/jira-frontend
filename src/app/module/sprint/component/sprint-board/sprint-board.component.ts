@@ -41,9 +41,6 @@ export class SprintBoardComponent implements OnInit {
       this.store.dispatch(selectProject({id: Number(projectId)}))
 
     })
-
-    console.log(this.screenHeight)
-    console.log('-----------')
     this.sprints$ = this.store.pipe(select(sprintBoards))
   }
 
