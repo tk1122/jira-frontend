@@ -12,7 +12,6 @@
                 cdkDropList
                 [cdkDropListData]="panel.todoIssues"
                 class="example-list"
-                style="{'height': 10000 }"
                 (cdkDropListDropped)="drop($event)">
                 <div *ngFor="let item of panel.todoIssues; let isTrue=true;let isLast=last">
                   <div class="example-box" cdkDrag *ngIf="!isLast && !isTrue">
