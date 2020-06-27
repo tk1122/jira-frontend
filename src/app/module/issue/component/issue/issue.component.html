@@ -1,0 +1,40 @@
+<div style="min-height: 100vh; padding: 10px 4em">
+  <div nz-row>
+    <h2>Your work</h2>
+  </div>
+
+  <div nz-row>
+    <nz-tabset style="width: 100%">
+      <nz-tab nzTitle="Assigned to me">
+        <div nz-row style="width: 100%">
+          <app-issue-list style="width: 100%" [data]="allIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="To do">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="todoIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Doing">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="doingIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Testing">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="testingIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+      <nz-tab nzTitle="Done">
+        <div nz-row>
+          <app-issue-list style="width: 100%" [data]="doneIssues$ | async"></app-issue-list>
+        </div>
+      </nz-tab>
+
+    </nz-tabset>
+  </div>
+</div>

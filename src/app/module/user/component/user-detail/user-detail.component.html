@@ -1,0 +1,64 @@
+<form nz-form [formGroup]="userForm" class="login-form" (ngSubmit)="submitUserForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Username</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="username"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Fullname</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="fullname"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Status</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select formControlName="status">
+        <nz-option *ngFor="let s of userStatusOptions" [nzLabel]="s.label" [nzValue]="s.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Gender</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select formControlName="gender">
+        <nz-option *ngFor="let g of userGenderOptions" [nzLabel]="g.label" [nzValue]="g.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Skill</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="skill"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Level</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="level"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Email</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="email"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Age</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input nz-input formControlName="age"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">Roles</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzErrorTip="Please choose at least one role">
+      <nz-select nzMode="tags" formControlName="roleIds">
+        <nz-option *ngFor="let role of roles$ | async" [nzLabel]="role.name" [nzValue]="role.id"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <button nz-button [nzType]="'primary'">Save</button>
+</form>
