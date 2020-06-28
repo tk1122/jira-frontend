@@ -13,10 +13,11 @@ import {
 import {HeaderComponent} from "./component/header/header.component";
 import {RouterModule} from "@angular/router";
 import {NotificationModule} from "../notification/notification.module";
+import {FilterPipe} from "./pipe/filter.pipe";
 
 
 @NgModule({
-  declarations: [PageNotFoundComponent, UnauthorizedAccessComponent, HeaderComponent],
+  declarations: [PageNotFoundComponent, UnauthorizedAccessComponent, HeaderComponent, FilterPipe],
     imports: [
         CommonModule,
         NzButtonModule,
@@ -28,7 +29,7 @@ import {NotificationModule} from "../notification/notification.module";
         RouterModule,
         NotificationModule,
     ],
-  exports: [PageNotFoundComponent, UnauthorizedAccessComponent, HeaderComponent]
+  exports: [PageNotFoundComponent, UnauthorizedAccessComponent, HeaderComponent, FilterPipe]
 })
 export class SharedComponentModule {
 }

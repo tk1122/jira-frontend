@@ -5,5 +5,6 @@ export interface AuthInfo {
   userId: number,
   accessToken: string,
   status: UserStatus,
-  isAdmin: boolean
+  isAdmin: boolean,
+  roles: number[]
 }

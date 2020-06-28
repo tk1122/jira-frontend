@@ -60,5 +60,5 @@
     </nz-form-control>
   </nz-form-item>
 
-  <button nz-button [nzType]="'primary'">Save</button>
+  <button *ngIf="isAdmin$ | async" nz-button [nzType]="'primary'">Save</button>
 </form>
