@@ -1,12 +1,12 @@
 <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" (click)="markAsReceived()">
-    <nz-badge [nzCount]="count"><i nz-icon nzType="bell" nzTheme="outline" style="font-size: 20px;"></i></nz-badge>
+    <nz-badge [nzCount]="count"><i nz-icon nzType="bell" nzTheme="outline" class="parent"></i></nz-badge>
 </a>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
         <nz-list class="demo-loadmore-list" [nzLoading]="initLoading" [nzHeader]="headerTemplate">
             <ng-template #headerTemplate>
-                <a (click)="markAsRead()">Đọc tất cả</a>
+                <a (click)="markAsRead()" class="head">Đọc tất cả</a>
             </ng-template>
             <nz-list-item *ngFor="let item of (notifs$ | async)" [ngStyle]="item.status < 2 ? {backgroundColor: '#f5f5f5'} : ''">
                 <ng-container>
