@@ -7,7 +7,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
-    <td class="issue-name" (click)="editIssue(data.id)">
+    <td class="issue-name">
       <img src="assets/images/icon-task.svg"/>
       {{ data.name }}</td>
     <td>{{ data.status | issueStatus }}</td>

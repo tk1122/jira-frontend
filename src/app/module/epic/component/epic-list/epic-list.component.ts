@@ -67,6 +67,7 @@ export class EpicListComponent implements OnInit {
       console.log(result)
       this.store.dispatch(createEpic({epic: result}))
     }
+    this.isVisible = false;
   }
 
   ngOnInit(): void {

@@ -1,41 +1,37 @@
 <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" [nzPlacement]="'bottomCenter'" (click)="markAsReceived()">
-  <nz-badge [nzCount]="count"><i nz-icon nzType="bell" nzTheme="outline" style="font-size: 20px;"></i></nz-badge>
+    <nz-badge [nzCount]="count"><i nz-icon nzType="bell" nzTheme="outline" class="parent"></i></nz-badge>
 </a>
 
-<nz-dropdown-menu #menu="nzDropdownMenu" style="width: 500px">
-  <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
-    <nz-list class="demo-loadmore-list" [nzLoading]="initLoading" [nzHeader]="headerTemplate">
-      <ng-template #headerTemplate>
-        <a (click)="markAsRead()">Đọc tất cả</a>
-      </ng-template>
-      <nz-list-item *ngFor="let item of (notifs$ | async)"  [ngStyle]="item.status < 2 ? {backgroundColor: '#f5f5f5'} : ''">
-        <ng-container>
-          <nz-list-item-meta
-            (click)="markAsRead(item.id)"
-            nzAvatar="assets/images/icon-jira.svg"
-            [nzDescription]="titleTemplate"
-          >
-            <ng-template #titleTemplate>
-            <span [ngStyle]="item.status < 2 ? {color: 'rgb(23, 43, 77)'} : ''">
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
+        <nz-list class="demo-loadmore-list" [nzLoading]="initLoading" [nzHeader]="headerTemplate">
+            <ng-template #headerTemplate>
+                <a (click)="markAsRead()" class="head">Đọc tất cả</a>
+            </ng-template>
+            <nz-list-item *ngFor="let item of (notifs$ | async)" [ngStyle]="item.status < 2 ? {backgroundColor: '#f5f5f5'} : ''">
+                <ng-container>
+                    <nz-list-item-meta (click)="markAsRead(item.id)" nzAvatar="assets/images/icon-jira.svg" [nzDescription]="titleTemplate">
+                        <ng-template #titleTemplate>
+                            <span [ngStyle]="item.status < 2 ? {color: 'rgb(23, 43, 77)'} : ''">
               {{item.message}}
             </span>
-            </ng-template>
-            <nz-list-item-meta-title>
-              <a href="https://ng.ant.design">
-              <span>
+                        </ng-template>
+                        <nz-list-item-meta-title>
+                            <a href="https://ng.ant.design">
+                                <span>
                  {{ item.entityName }}
               </span>
-              </a>
-              <nz-row>
-                <span class="ant-list-timestamp">{{ item.timestamp }}</span>
-              </nz-row>
-            </nz-list-item-meta-title>
-          </nz-list-item-meta>
-          <ul nz-list-item-actions>
-            <nz-list-item-action><a (click)="deleteNotification(item.id)"><i nz-icon nzType="close" nzTheme="outline"></i></a></nz-list-item-action>
-          </ul>
-        </ng-container>
-      </nz-list-item>
-    </nz-list>
-  </cdk-virtual-scroll-viewport>
+                            </a>
+                            <nz-row>
+                                <span class="ant-list-timestamp">{{ item.timestamp }}</span>
+                            </nz-row>
+                        </nz-list-item-meta-title>
+                    </nz-list-item-meta>
+                    <ul nz-list-item-actions>
+                        <nz-list-item-action><a (click)="deleteNotification(item.id)"><i nz-icon nzType="close" nzTheme="outline"></i></a></nz-list-item-action>
+                    </ul>
+                </ng-container>
+            </nz-list-item>
+        </nz-list>
+    </cdk-virtual-scroll-viewport>
 </nz-dropdown-menu>

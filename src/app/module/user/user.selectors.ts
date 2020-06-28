@@ -34,4 +34,17 @@ export const selectedUserRoles = createSelector(users, roles, selectedUserId, (u
   console.log(a);
 
   return a;
-})
+});
+
+// tslint:disable-next-line:no-shadowed-variable
+export const leaderRole = createSelector(roles, roles => roles.find(r => r.name === 'leader'));
+
+// tslint:disable-next-line:no-shadowed-variable
+export const memberRole = createSelector(roles, roles => roles.find(r => r.name === 'member'));
+
+// tslint:disable-next-line:no-shadowed-variable
+export const leaders = createSelector(users, leaderRole, (users, leaderRole) => users.filter(u => u.roleIds.includes(leaderRole?.id || 0)));
+
+// tslint:disable-next-line:no-shadowed-variable
+export const members = createSelector(users, memberRole, (users, memberRole) => users.filter(u => u.roleIds.includes(memberRole?.id || 0)));
+

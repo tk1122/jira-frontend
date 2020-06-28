@@ -25,7 +25,7 @@ export const createProject = createAction(
 
 export const createProjectSuccess = createAction(
   '[Project API] Create project success',
-  props<{ message: ErrorMessage }>()
+  props<{ project: Project }>()
 )
 
 export const createProjectFailure = createAction(
@@ -40,7 +40,7 @@ export const updateProject = createAction(
 
 export const updateProjectSuccess = createAction(
   '[Project API] Update project success',
-  props<{ message: ErrorMessage }>()
+  props<{ project: Project }>()
 )
 
 export const updateProjectFailure = createAction(
