@@ -2,7 +2,7 @@
 
 <div cdkDropListGroup>
   <nz-collapse>
-    <nz-collapse-panel *ngFor="let panel of (sprints$|async)" [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled" (nzActiveChange)="onActiveChange($event, panel.id)">
+    <nz-collapse-panel *ngFor="let panel of (sprints$|async)" [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled" (nzActiveChange)="onActiveChange($event, panel.id)" [nzExtra]="extraTpl">
       <div class="example-container">
         <div
           cdkDropList
@@ -18,4 +18,8 @@
       </div>
     </nz-collapse-panel>
   </nz-collapse>
+  <ng-template #extraTpl>
+    <!-- You can use stopPropagation if you don't want the panel to toggle -->
+    <i nz-icon nzType="setting" (click)="$event.stopPropagation()"></i>
+  </ng-template>
 </div>

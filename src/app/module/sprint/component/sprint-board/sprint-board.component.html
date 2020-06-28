@@ -11,14 +11,14 @@
                         <div cdkDropList [cdkDropListData]="panel.todoIssues" class="example-list" (cdkDropListDropped)="drop($event)">
                             <div *ngFor="let item of panel.todoIssues; let isTrue=true;let isLast=last">
                                 <div class="example-box" cdkDrag *ngIf="!isLast && !isTrue">
-                                    <span>{{item.name}</span>
+                                    <span>{{item.name}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="example-container">
-                        <h2 class="header-title">To do</h2>
+                        <h2 class="header-title">Doing</h2>
                         <div cdkDropList [cdkDropListData]="panel.doingIssues" class="example-list" (cdkDropListDropped)="drop($event)">
                             <div *ngFor="let item of panel.doingIssues; let isTrue=true;let isLast=last">
                                 <div class="example-box" cdkDrag *ngIf="!isLast && !isTrue">
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="example-container">
-                        <h2 class="header-title">To do</h2>
+                        <h2 class="header-title">Testing</h2>
                         <div cdkDropList [cdkDropListData]="panel.testingIssues" class="example-list" (cdkDropListDropped)="drop($event)">
                             <div *ngFor="let item of panel.testingIssues; let isTrue=true;let isLast=last">
                                 <div class="example-box" cdkDrag *ngIf="!isLast && !isTrue">
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="example-container">
-                        <h2 class="header-title">To do</h2>
+                        <h2 class="header-title">Done</h2>
                         <div cdkDropList [cdkDropListData]="panel.doneIssues" class="example-list" (cdkDropListDropped)="drop($event)">
                             <div *ngFor="let item of panel.doneIssues; let isTrue=true;let isLast=last">
                                 <div class="example-box" cdkDrag *ngIf="!isLast && !isTrue">
