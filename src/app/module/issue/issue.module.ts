@@ -11,11 +11,10 @@ import {EffectsModule} from '@ngrx/effects';
 import {IssueEffects} from './issue.effects';
 import {IssueListComponent} from './component/issue-list/issue-list.component';
 import {IssueStatusPipe} from "./pipe/issue-status.pipe";
-import {IssueDetailComponent} from './component/issue-detail/issue-detail.component';
 
 
 @NgModule({
-  declarations: [IssueComponent, IssueListComponent, IssueStatusPipe, IssueDetailComponent],
+  declarations: [IssueComponent, IssueListComponent, IssueStatusPipe],
   imports: [
     CommonModule,
     IssueRoutingModule,

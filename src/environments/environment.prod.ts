@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: 'https://jira-1122.herokuapp.com/api/',
+  url: 'https://jira-1122.herokuapp.com/api',
   firebase: {
     apiKey: "AIzaSyDbcHAoqIWfGsdzhrHSAfMbVedOTmaepMo",
     authDomain: "jira-22139.firebaseapp.com",

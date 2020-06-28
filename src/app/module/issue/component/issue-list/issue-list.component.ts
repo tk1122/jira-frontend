@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue, IssueStatus} from "../../../../../shared/model/issue";
+import {Issue} from "../../../../../shared/model/issue";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,14 +10,11 @@ import {Router} from "@angular/router";
 export class IssueListComponent implements OnInit {
   @Input('data')
   issues: Issue[] = [];
-
-  constructor(private readonly router: Router) { }
-
   panigation: boolean = this.issues.length > 10
-  ngOnInit(): void {
+
+  constructor(private readonly router: Router) {
   }
 
-  editIssue(id: number) {
-    this.router.navigate(['/issues', id]).then()
+  ngOnInit(): void {
   }
 }
