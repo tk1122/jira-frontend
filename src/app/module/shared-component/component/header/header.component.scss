@@ -1,42 +1,43 @@
 .header {
-  min-height: 50px;
-  background-color: #0547a6;
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: 0px;
-  z-index: 100;
+    min-height: 50px;
+    background-color: #0547a6;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
 }
 
 .icon-header {
-  margin-left: 1em;
-  margin-right: 10px;
-  height: 30px;
-  width: 30px;
+    margin-left: 1em;
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+    margin-bottom: 10px;
 }
 
 .logo-name {
-  color: #cccccc;
-  font-size: 30px;
+    color: #cccccc;
+    font-size: 30px;
 }
 
 .ant-menu {
-  background: none;
+    background: none;
 }
 
 .user-icon {
-  background-color: white;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
 }
 
 .username {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .name {
-  color: white;
-  font-size: 20px;
+    color: white;
+    font-size: 20px;
 }

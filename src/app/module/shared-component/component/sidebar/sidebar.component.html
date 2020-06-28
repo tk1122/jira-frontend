@@ -1,18 +1,17 @@
 <div class="sider-menu">
-  {{(selectedProject$ | async)?.name}}
-  <ul nz-menu nzMode="inline">
-    <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/epics">
-      <i nz-icon nzType="mail"></i>
-      Roadmap
-    </li>
-    <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/sprints">
-      <i nz-icon nzType="appstore"></i>
-      Backlog
-    </li>
-    <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/sprints/board">
-      <i nz-icon nzType="appstore"></i>
-      Board
-    </li>
-  </ul>
+    <div style="margin-left:10px;">
+        <h2>{{(selectedProject$ | async)?.name}}</h2>
+    </div>
+    <ul nz-menu nzMode="inline">
+        <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/epics">
+            <i nz-icon nzType="mail"></i> Roadmap
+        </li>
+        <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/sprints">
+            <i nz-icon nzType="appstore"></i> Backlog
+        </li>
+        <li nz-menu-item routerLink="/projects/{{(selectedProject$ | async)?.id}}/sprints/board">
+            <i nz-icon nzType="appstore"></i> Board
+        </li>
+    </ul>
 
 </div>

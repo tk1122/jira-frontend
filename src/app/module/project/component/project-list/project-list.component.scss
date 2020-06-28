@@ -1,3 +1,24 @@
 .project-name {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.container {
+    margin: 3em 0em 3em 11em;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #6c7ae0;
+    color: white;
+    height: 55px;
+    font-size: 17px;
+    font-family: serif;
+}
+
+.table td,
+.table th {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
