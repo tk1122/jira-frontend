@@ -2,7 +2,8 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {
   issueEntityAdapter,
   issueFeatureKey,
-  IssueState, projectIssueEntityAdapter,
+  IssueState,
+  projectIssueEntityAdapter,
   projectIssueFeatureKey,
   ProjectIssueState
 } from "./issue.reducer";

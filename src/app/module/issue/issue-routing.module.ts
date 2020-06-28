@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {IssueComponent} from './component/issue/issue.component';
 import {IssueListComponent} from "./component/issue-list/issue-list.component";
-import {IssueDetailComponent} from "./component/issue-detail/issue-detail.component";
 
 const routes: Routes = [{
   path: '', component: IssueComponent, children: [
@@ -13,10 +12,6 @@ const routes: Routes = [{
     },
   ],
 },
-  {
-    path: ':id',
-    component: IssueDetailComponent
-  },
 ];
 
 @NgModule({
