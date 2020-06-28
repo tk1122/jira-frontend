@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue, IssueStatus} from "../../../../../shared/model/issue";
+import {Issue} from "../../../../../shared/model/issue";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-issue-list',
@@ -9,11 +10,11 @@ import {Issue, IssueStatus} from "../../../../../shared/model/issue";
 export class IssueListComponent implements OnInit {
   @Input('data')
   issues: Issue[] = [];
-
-  constructor() { }
-
   panigation: boolean = this.issues.length > 10
-  ngOnInit(): void {
+
+  constructor(private readonly router: Router) {
   }
 
+  ngOnInit(): void {
+  }
 }

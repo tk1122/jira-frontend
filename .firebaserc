@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "jira-22139": {
+      "hosting": {
+        "jira-frontend": [
+          "jira-22139"
+        ]
+      }
+    }
+  }
+}
