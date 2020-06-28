@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-  background-color: #f8f8f8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,9 +12,19 @@
   text-shadow: 0 0.2px 0.3px rgba(0, 0, 0, 0.353);
   background-size: cover;
 }
-
-.login-form {
+.-form{
   box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.1);
   z-index: 2;
+  background-color:rgb(236, 236, 236) ;
   border-radius: 15px;
+}
+.ant-card-body{
+  border-radius: 5px;
+}
+.-form-button{
+  text-align: center;
+}
+p{
+  font-size: 95%;
+color: rgb(61, 61, 61) !important;
 }
