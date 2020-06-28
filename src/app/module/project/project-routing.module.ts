@@ -9,7 +9,8 @@ const routes: Routes = [{
   path: '', component: ProjectComponent, children: [
     {
       path: '',
-      component: ProjectListComponent
+      component: ProjectListComponent,
+      loadChildren: () => import('../../module/user/user.module').then(m => m.UserModule),
     },
     {
       path: ':id/epics',

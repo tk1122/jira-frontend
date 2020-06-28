@@ -1,44 +1,116 @@
-<div class="container">
-    <div nz-row>
-        <h2>Projects</h2>
+<div style="min-height: 100vh; padding: 10px 4em">
+  <div nz-row>
+    <h2>Project</h2>
+  </div>
+  <div nz-row>
+    <div nz-col [nzSpan]="4">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" nz-input placeholder="" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
     </div>
-    <div nz-col nzSpan="20">
-        <div nz-col [nzSpan]="4" [nzOffset]="22">
-            <button nz-button nzType="primary">Create Project</button>
-        </div>
-        <div nz-col [nzSpan]="6">
-            <nz-input-group [nzSuffix]="suffixIconSearch">
-                <input type="text" nz-input placeholder="" />
-            </nz-input-group>
-            <ng-template #suffixIconSearch>
-                <i nz-icon nzType="search"></i>
-            </ng-template>
-
-        </div>
-        <br>
+    <div nz-col [nzSpan]="4" [nzOffset]="16" *ngIf="isPm$ | async">
+      <button nz-button nzType="primary" (click)="showCreateProjectModal()">Create Project</button>
     </div>
-    <div nz-row class="content">
-        <div nz-col nzSpan="20">
-            <nz-table #basicTable [nzData]="projects$ | async" class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Lead</th>
-                        <th>PM</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td class="project-name" (click)="handleClick(data.id)">{{ data.name }}</td>
-                        <td>{{ data.description }}</td>
-                        <td>{{ data.leaderId }}</td>
-                        <td>{{ data.pmId }}</td>
-                        <td><a><i nz-icon nzType="edit" nzTheme="outline"></i></a></td>
-                    </tr>
-                </tbody>
-            </nz-table>
-        </div>
-    </div>
+  </div>
+  <div nz-row style="width: 100%; margin-t" >
+    <nz-table #basicTable [nzData]="projects$ | async" style="width: 100%">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Lead</th>
+        <th>PM</th>
+        <th *ngIf="isPm$ | async">Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td class="project-name" (click)="handleClick(data.id)">{{ data.name }}</td>
+        <td>{{ data.description }}</td>
+        <td>{{ data.leader.fullname }}</td>
+        <td>{{ data.pm.fullname }}</td>
+        <td (click)="showUpdateModal(data.id)" *ngIf="isPm$ | async"><a><i nz-icon nzType="edit" nzTheme="outline"></i></a></td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </div>
+
+<nz-modal [(nzVisible)]="isCreateModalVisible" nzTitle="Create new project" [nzFooter]="modalFooter">
+  <form nz-form [formGroup]="projectForm" class="login-form">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Name</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="name"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Description</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="description"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Leader</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please choose project leader">
+        <nz-select formControlName="leaderId">
+          <nz-option *ngFor="let l of leaders$ | async" [nzLabel]="l.fullname" [nzValue]="l.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Members</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please choose project members">
+        <nz-select formControlName="memberIds" nzMode="tags">
+          <nz-option *ngFor="let m of members$ | async" [nzLabel]="m.fullname" [nzValue]="m.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancle</button>
+    <button nz-button nzType="primary" (click)="handleSubmitCreateProject()" >Create</button>
+  </ng-template>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isUpdateModalVisible" nzTitle="Update project" [nzFooter]="modalFooter2">
+  <form nz-form [formGroup]="updateProjectForm" class="login-form">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Name</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="name"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Description</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="description"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Leader</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please choose project leader">
+        <nz-select formControlName="leaderId">
+          <nz-option *ngFor="let l of leaders$ | async" [nzLabel]="l.fullname" [nzValue]="l.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7">Members</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzErrorTip="Please choose project members">
+        <nz-select formControlName="memberIds" nzMode="tags">
+          <nz-option *ngFor="let m of members$ | async" [nzLabel]="m.fullname" [nzValue]="m.id"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <ng-template #modalFooter2>
+    <button nz-button nzType="default" (click)="handleCancel()">Cancle</button>
+    <button nz-button nzType="primary" (click)="handleSubmitUpdateProject()" >Update</button>
+  </ng-template>
+</nz-modal>

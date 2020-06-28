@@ -9,6 +9,7 @@ import {Role} from "../../../../../shared/model/role";
 import {roles, selectedUser} from "../../user.selectors";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Update} from "@ngrx/entity";
+import {isAdmin} from "../../../auth/auth.selectors";
 
 @Component({
   selector: 'app-user-detail',
@@ -20,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   userStatusOptions = userStatusOptions;
   userGenderOptions = userGenderOptions;
   userForm: FormGroup;
+  isAdmin$: Observable<boolean | undefined> = of();
 
   constructor(private readonly store: Store, private readonly route: ActivatedRoute, private readonly fb: FormBuilder) {
     this.userForm = this.fb.group({
@@ -59,6 +61,7 @@ export class UserDetailComponent implements OnInit {
     })
 
     this.roles$ = this.store.pipe(select(roles))
+    this.isAdmin$ = this.store.pipe(select(isAdmin))
   }
 
   submitUserForm() {

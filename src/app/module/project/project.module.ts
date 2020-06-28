@@ -9,7 +9,16 @@ import * as fromProject from './project.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectEffects } from './project.effects';
 import {SharedComponentModule} from "../shared-component/shared-component.module";
-import {NzButtonModule, NzGridModule, NzIconModule, NzInputModule, NzTableModule, NzWaveModule} from "ng-zorro-antd";
+import {
+  NzButtonModule, NzFormModule,
+  NzGridModule,
+  NzIconModule,
+  NzInputModule,
+  NzModalModule, NzSelectModule,
+  NzTableModule,
+  NzWaveModule
+} from "ng-zorro-antd";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,7 +34,11 @@ import {NzButtonModule, NzGridModule, NzIconModule, NzInputModule, NzTableModule
     NzInputModule,
     NzIconModule,
     NzWaveModule,
-    NzButtonModule
+    NzButtonModule,
+    NzModalModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzSelectModule
   ]
 })
 export class ProjectModule { }
