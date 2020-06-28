@@ -1,8 +1,15 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {issueEntityAdapter, issueFeatureKey, IssueState} from "./issue.reducer";
+import {
+  issueEntityAdapter,
+  issueFeatureKey,
+  IssueState, projectIssueEntityAdapter,
+  projectIssueFeatureKey,
+  ProjectIssueState
+} from "./issue.reducer";
 import {IssueStatus} from "../../../shared/model/issue";
 
 export const issueState = createFeatureSelector<IssueState>(issueFeatureKey);
+export const projectIssueState = createFeatureSelector<ProjectIssueState>(projectIssueFeatureKey);
 
 export const issues = createSelector(
   issueState,
@@ -39,5 +46,12 @@ export const doneIssues = createSelector(
 
 export const isIssuesLoaded = createSelector(
   issueState,
-  issueState => issueState.isAllIssuesLoaded
+  issueState => issueState.isIssuesLoaded
 )
+
+export const isProjectIssuesLoaded = createSelector(
+  projectIssueState,
+  projectIssueState => projectIssueState.isProjectIssuesLoaded
+)
+
+export const projectIssue = createSelector(projectIssueState, projectIssueEntityAdapter.getSelectors().selectAll)

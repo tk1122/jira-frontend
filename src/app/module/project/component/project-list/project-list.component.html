@@ -1,21 +1,44 @@
-<nz-table #basicTable [nzData]="projects$ | async">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Lead</th>
-    <th>PM</th>
-    <th>Edit</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td class="project-name" (click)="handleClick(data.id)">{{ data.name }}</td>
-    <td>{{ data.description }}</td>
-    <td>{{ data.leaderId }}</td>
-    <td>{{ data.pmId }}</td>
-    <td><a><i nz-icon nzType="edit" nzTheme="outline"></i></a></td>
-  </tr>
-  </tbody>
-</nz-table>
-<router-outlet></router-outlet>
+<div class="container">
+    <div nz-row>
+        <h2>Projects</h2>
+    </div>
+    <div nz-col nzSpan="20">
+        <div nz-col [nzSpan]="4" [nzOffset]="22">
+            <button nz-button nzType="primary">Create Project</button>
+        </div>
+        <div nz-col [nzSpan]="6">
+            <nz-input-group [nzSuffix]="suffixIconSearch">
+                <input type="text" nz-input placeholder="" />
+            </nz-input-group>
+            <ng-template #suffixIconSearch>
+                <i nz-icon nzType="search"></i>
+            </ng-template>
+
+        </div>
+        <br>
+    </div>
+    <div nz-row class="content">
+        <div nz-col nzSpan="20">
+            <nz-table #basicTable [nzData]="projects$ | async" class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Lead</th>
+                        <th>PM</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of basicTable.data">
+                        <td class="project-name" (click)="handleClick(data.id)">{{ data.name }}</td>
+                        <td>{{ data.description }}</td>
+                        <td>{{ data.leaderId }}</td>
+                        <td>{{ data.pmId }}</td>
+                        <td><a><i nz-icon nzType="edit" nzTheme="outline"></i></a></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>

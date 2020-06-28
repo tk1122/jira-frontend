@@ -1,8 +1,11 @@
 .header {
-    min-height: 60px;
+    min-height: 50px;
     background-color: #0547a6;
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 100;
 }
 
 .icon-header {
@@ -10,6 +13,7 @@
     margin-right: 10px;
     height: 30px;
     width: 30px;
+    margin-bottom: 10px;
 }
 
 .logo-name {

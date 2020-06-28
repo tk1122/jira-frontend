@@ -23,18 +23,10 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.pipe(select(userId)).subscribe(userId => {
-      if (userId) {
-        this.store.dispatch(loadProjects({userId}))
-      }
-    })
-
     this.projects$ = this.store.pipe(select(projects))
   }
 
   handleClick(id: number) {
-    this.router.navigate(['/projects', id])
-    console.log(id);
-    this.store.dispatch(selectProject({id}))
+    this.router.navigate(['/projects', id, 'epics']).then()
   }
 }

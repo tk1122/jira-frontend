@@ -32,7 +32,7 @@ export class AuthEffects implements OnInitEffects {
   loginFailure$ = createEffect(() => this.actions$.pipe(
     ofType(loginFailure),
     tap((action) => {
-      this.notification.error(action.message.error, '')
+      this.notification.error(action.message.error, action.message.message)
     })
   ), {dispatch: false})
 

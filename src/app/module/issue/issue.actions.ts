@@ -4,11 +4,20 @@ import {ErrorMessage} from "../../../shared/model/error-message";
 
 export const loadIssues = createAction(
   '[Issue Page] Load Issues',
-  props<{}>()
+);
+
+export const loadIssuesByProjectId = createAction(
+  '[Issue Page] Load Issues By Project',
+  props<{projectId:string}>()
 );
 
 export const loadIssuesSuccess = createAction(
   '[Issue API] Load Issues Success',
+  props<{ issues: Issue[] }>()
+);
+
+export const loadIssuesByProjectIdSuccess = createAction(
+  '[Issue API] Load Issues By Project Success',
   props<{ issues: Issue[] }>()
 );
 

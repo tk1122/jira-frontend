@@ -7,9 +7,9 @@ export const projects = createSelector(selectProjectState, projectEntityAdapter.
 
 export const isProjectsLoaded = createSelector(selectProjectState, projectState => projectState.isProjectsLoaded)
 
-export const projectSelectedId = createSelector(selectProjectState, projectState => projectState.selectedProjectId)
+export const projectSelectedId = createSelector(selectProjectState, projectState => projectState?.selectedProjectId)
 
-export const projectSelected = createSelector(projects,  projectSelectedId, (projects,id)=> {
+export const selectedProject = createSelector(projects,  projectSelectedId, (projects,id)=> {
   if (id) {
     return projects.find(x => x.id === id)
   }
